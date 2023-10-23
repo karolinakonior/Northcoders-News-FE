@@ -6,7 +6,7 @@ const NavBar = () => {
         <>
             <div id="sidebar">
                 <Dropdown.Menu show>
-                <Dropdown.Item href="/action-1"eventKey="1">
+                <Dropdown.Item href="/" eventKey="1">
                 <Link to="/">Home</Link>
                 </Dropdown.Item>
                     <Dropdown.Divider />
@@ -19,6 +19,7 @@ const NavBar = () => {
                     <Dropdown.Item eventKey="5">Community</Dropdown.Item>
                 </Dropdown.Menu>
             </div>
+            
         </>
     );
 }
