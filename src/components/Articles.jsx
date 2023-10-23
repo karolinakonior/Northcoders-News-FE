@@ -24,7 +24,6 @@ const Articles = () => {
             <Spinner animation="border" role="status">
                 <span className="visually-hidden">Loading...</span>
             </Spinner>
-            <h4>Loading...</h4>
         </>
     }
 
@@ -34,7 +33,7 @@ const Articles = () => {
             <h1 id="articles-title">ARTICLES</h1>
             <ul>
                 {articles.map(article => {
-                    return <ArticleCard key={article.article_id} comment_count={article.comment_count} title={article.title} author={article.author} created_at={article.created_at} votes={article.votes} article_img_url={article.article_img_url} article_id={article.article_id} />
+                    return <ArticleCard key={article.article_id} comment_count={article.comment_count} title={article.title} author={article.author} created_at={article.created_at} votes={article.votes} article_img_url={article.article_img_url} article_id={article.article_id} topic={article.topic}/>
                 })}
             </ul>
             </div>
