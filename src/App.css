@@ -1,6 +1,6 @@
 .grid {
   display: grid;
-  grid-template-rows: 5rem 800px auto;
+  grid-template-rows: 5rem 80% auto;
   grid-template-columns: 12rem 80% auto;
   grid-template-areas:
     "header header header"
@@ -30,6 +30,7 @@
 #article-card {
   padding: 2%;
   margin: 1rem;
+  height: auto;
 }
 
 #articles-title {
@@ -38,7 +39,7 @@
 }
 
 #article-card-image {
-  height: 200px;
+  height: 12rem;
   margin: 1rem;
 }
 
@@ -49,4 +50,25 @@
 
 #comment-icon {
   height: 1rem;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 66.667% 33.334%;	
+}
+
+* {
+	box-sizing: border-box;
+}
+
+.a {
+  text-align: left;
+}
+
+.b {
+  text-align: right;
+}
+
+.container {
+	height: 3rem;
 }
