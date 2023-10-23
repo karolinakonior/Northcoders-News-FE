@@ -1,0 +1,52 @@
+.grid {
+  display: grid;
+  grid-template-rows: 5rem 800px auto;
+  grid-template-columns: 12rem 80% auto;
+  grid-template-areas:
+    "header header header"
+    "sidebar article article"
+    "sidebar article article"
+}
+
+#article {
+  padding: 2%;
+  grid-area: article;
+}
+
+#header {
+  background: #0B1416;
+  grid-area: header;
+  height: 100%;
+  padding: 1.5rem;
+}
+
+#sidebar {
+  background: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+  color: white;
+  grid-area: sidebar;
+  margin: 1rem;
+}
+
+#article-card {
+  padding: 2%;
+  margin: 1rem;
+}
+
+#articles-title {
+  padding: 1rem;
+  margin-left: 2rem;
+}
+
+#article-card-image {
+  height: 200px;
+  margin: 1rem;
+}
+
+#article-card :hover {
+  background-color: rgb(223, 223, 223);
+  opacity: 90%;
+}
+
+#comment-icon {
+  height: 1rem;
+}
