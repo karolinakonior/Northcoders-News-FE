@@ -9,6 +9,7 @@ import vote from '../images/vote-icon.png'
 import Spinner from 'react-bootstrap/Spinner';
 import React from 'react'
 import ReactTimeAgo from 'react-time-ago'
+import CommentsList from './CommentsList';
 
 const Article = () => {
     const { article_id } = useParams()
@@ -76,6 +77,7 @@ const Article = () => {
                             </div>
                         </div>
                     </Card.Body>
+                    <CommentsList article_id={article_id}/>
                 </Card>
             </div>
         </>
