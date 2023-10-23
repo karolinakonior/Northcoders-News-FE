@@ -1,10 +1,19 @@
 import './App.css'
+import Header from './components/Header'
+import NavBar from './components/NavBar'
+import Articles from './components/Articles'
 
 function App() {
 
   return (
     <>
-      <h1>NC-News</h1>
+      <div className="grid">
+        <Header />
+        <NavBar />
+        <div id="article">
+          <Articles />
+        </div>
+      </div>
     </>
   )
 }
