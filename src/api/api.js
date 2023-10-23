@@ -12,3 +12,7 @@ export function getArticle (article_id) {
   return articlesApi.get(`/articles/${article_id}`)
 }
 
+export function getComments (article_id) {
+  return articlesApi.get(`/articles/${article_id}/comments`)
+}
+
