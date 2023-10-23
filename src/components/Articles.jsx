@@ -5,11 +5,13 @@ import ArticleCard from "./ArticleCard";
 const Articles = () => {
     const [articles, setArticles] = useState([])
 
-
     useEffect(() => {
         getArticles()
             .then((response) => {
                 setArticles(response.data.articles)
+            })
+            .catch((error) => {
+                console.log(error)
             })
     })
 

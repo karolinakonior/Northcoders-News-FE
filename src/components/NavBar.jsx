@@ -1,11 +1,14 @@
 import Dropdown from 'react-bootstrap/Dropdown';
+import { Link } from 'react-router-dom';
 
 const NavBar = () => {
     return (
         <>
             <div id="sidebar">
                 <Dropdown.Menu show>
-                    <Dropdown.Item eventKey="1">Home</Dropdown.Item>
+                <Dropdown.Item href="/action-1"eventKey="1">
+                <Link to="/">Home</Link>
+                </Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item eventKey="2">Coding</Dropdown.Item>
                     <Dropdown.Divider />
