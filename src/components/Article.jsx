@@ -19,9 +19,9 @@ const Article = () => {
     const [article, setArticle] = useState({})
     const [isLoading, setIsLoading] = useState(true)
     const [articleVotes, setArticleVotes] = useState(0)
+    const [userVotes, setUserVotes] = useState(0)
     const [isAddDisabled, setIsAddDisabled] = useState(false);
     const [isSubtractDisabled, setIsSubtractDisabled] = useState(false);
-    const [userVotes, setUserVotes] = useState(0)
     const [err, setErr] = useState(null);
     const {username, setUsername} = useContext(UsernameContext)
 
@@ -40,66 +40,30 @@ const Article = () => {
             })
     }, [])
 
-
-
-    const setDisabled = () => {
-        if (userVotes > 0) {
-                    setIsAddDisabled(true);
-                    setIsSubtractDisabled(false)
-                } else if (userVotes < 0) {
-                    setIsAddDisabled(false)
-                    setIsSubtractDisabled(true)
-                } else {
-                    setIsAddDisabled(false)
-                    setIsSubtractDisabled(false)
-                }
+    const handleUserVotes = (vote) => {
+        if (userVotes + vote > 0) {
+            setIsAddDisabled(true);
+            setIsSubtractDisabled(false)
+        } else if (userVotes + vote < 0) {
+            setIsAddDisabled(false)
+            setIsSubtractDisabled(true)
+        } else {
+            setIsAddDisabled(false)
+            setIsSubtractDisabled(false)
+        }
+        setUserVotes((userVotes + vote));
     }
-    // useEffect(() => {
-    //     if (userVotes > 0) {
-    //         setIsAddDisabled(true);
-    //         setIsSubtractDisabled(false)
-    //     } else if (userVotes < 0) {
-    //         setIsAddDisabled(false)
-    //         setIsSubtractDisabled(true)
-    //     } else {
-    //         setIsAddDisabled(false)
-    //         setIsSubtractDisabled(false)
-    //     }
-    // }, [userVotes])
 
-    const increaseVotes = (votes) => {
+    const handleVote = (vote) => {
+        setArticleVotes((articleVotes + vote));
 
-        setArticleVotes((currentVotes) => {
-            return currentVotes + votes;
-        })
+        handleUserVotes(vote);
 
-        setUserVotes(currentVotes => {
-            return currentVotes + votes
-        })
-        
-        return changeArticleVotes(article_id, votes)
+        return changeArticleVotes(article_id, vote)
             .catch((err) => {
                 setArticleVotes((currentVotes) => {
                     setErr('Something went wrong, please try again.');
-                    return currentVotes - 1;
-                })
-            })
-    }
-
-    const decreaseVotes = (votes) => {
-        setArticleVotes((currentVotes) => {
-            return currentVotes + votes;
-        })
-
-        setUserVotes(currentVotes => {
-            return currentVotes + votes
-        })
-
-        return changeArticleVotes(article_id, votes)
-            .catch((err) => {
-                setArticleVotes((currentVotes) => {
-                    setErr('Something went wrong, please try again.');
-                    return currentVotes + 1;
+                    return currentVotes += vote;
                 })
             })
     }
@@ -142,9 +106,9 @@ const Article = () => {
                             <section className="wrapper">
                                 <section className="box a">
 
-                                    <button className="button" id={isAddDisabled ? "button-disabled" : ""} disabled={isAddDisabled} onClick={(() => { increaseVotes(1) })}>
+                                    <button className="button" id={isAddDisabled ? "button-disabled" : ""} disabled={isAddDisabled} onClick={(() => { handleVote(1) })}>
                                         <img style={{ height: "2rem" }} src={upvote} alt="Image representing votes count" /></button>
-                                    <button id={isSubtractDisabled ? "button-disabled" : ""} disabled={isSubtractDisabled} onClick={(() => { decreaseVotes(-1) })}>
+                                    <button id={isSubtractDisabled ? "button-disabled" : ""} disabled={isSubtractDisabled} onClick={(() => { handleVote(-1) })}>
                                         <img style={{ height: "2rem" }} src={downvote} alt="Image representing votes count" />
                                     </button>
                                     <b style={{ paddingLeft: "0.5rem" }}>{articleVotes}</b>
