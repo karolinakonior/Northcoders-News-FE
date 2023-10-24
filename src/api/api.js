@@ -16,13 +16,7 @@ export function getComments(article_id) {
   return articlesApi.get(`/articles/${article_id}/comments`)
 }
 
-export function addArticleVotes(article_id) {
-  const product = { "inc_votes": 1 };
+export function changeArticleVotes(article_id, votes) {
+  const product = { "inc_votes": votes};
   return articlesApi.patch(`https://northcoders-news-api-ibfk.onrender.com/api/articles/${article_id}`, product)
 }
-
-export function subtractArticleVotes(article_id) {
-  const product = { "inc_votes": -1 };
-  return articlesApi.patch(`https://northcoders-news-api-ibfk.onrender.com/api/articles/${article_id}`, product)
-}
-
