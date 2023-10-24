@@ -9,7 +9,6 @@
 }
 
 #article {
-  padding: 2%;
   grid-area: article;
 }
 
@@ -28,8 +27,6 @@
 }
 
 #article-card {
-  padding: 2%;
-  margin: 1rem;
   height: auto;
 }
 
@@ -43,26 +40,17 @@
   margin: 1rem;
 }
 
-#article-card :hover {
-  background-color: rgb(223, 223, 223);
-  opacity: 90%;
-}
-
 #comment-icon {
   height: 1rem;
 }
 
 .wrapper {
   display: grid;
-  grid-template-columns: 66.667% 33.334%;	
+  grid-template-columns: 50% 50%;	
 }
 
 * {
 	box-sizing: border-box;
-}
-
-.a {
-  text-align: left;
 }
 
 .b {
@@ -70,5 +58,17 @@
 }
 
 .container {
-	height: 3rem;
+	height: 2.5rem;
+}
+
+button {
+  padding:0.1em 0.1em;
+  background-color:#ffffff;
+  border:0;
+  cursor:pointer;
+}
+
+#button-disabled {
+  opacity: 0.65; 
+  cursor: not-allowed;
 }

@@ -9,6 +9,10 @@ const CommentsList = ({ article_id }) => {
     const [comments, setComments] = useState([])
     const [isLoading, setIsLoading] = useState(true)
 
+    function parseCommentCreatedAt(comment){
+        return Date.parse(comment.created_at);
+    }
+
     useEffect(() => {
         setIsLoading(true)
         getComments(article_id)
@@ -32,21 +36,21 @@ const CommentsList = ({ article_id }) => {
 
     return (
         <>
-            <h3 style={{ padding: '0.5rem', margin: '1rem', 'font-size': '2rem' }}>Comments:</h3>
+            <h3 style={{ padding: '0.5rem', margin: '1rem', 'fontSize': '2rem' }}>Comments:</h3>
             {comments.map((comment) => {
                 return (
-                    <Card style={{ width: '100%' }}>
+                    <Card style={{ width: '100%' }} key={comment.comment_id}>
                         <Card.Body>
-                            <div className="container">
-                                <div className="wrapper">
-                                    <div class="box a">
+                            <section className="container">
+                                <section className="wrapper">
+                                    <section className="box a">
                                         <Card.Title>{comment.author}</Card.Title>
-                                    </div>
-                                    <div class="box b">
-                                        <Card.Subtitle className="mb-2 text-muted"><ReactTimeAgo date={comment.created_at} locale="en-US" /></Card.Subtitle>
-                                    </div>
-                                </div>
-                            </div>
+                                    </section>
+                                    <section className="box b">
+                                        <Card.Subtitle className="mb-2 text-muted"><ReactTimeAgo date={parseCommentCreatedAt(comment)} locale="en-US" /></Card.Subtitle>
+                                    </section>
+                                </section>
+                            </section>
                             <Card.Text>
                                 {comment.body}
                             </Card.Text>

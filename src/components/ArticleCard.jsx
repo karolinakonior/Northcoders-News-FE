@@ -8,7 +8,9 @@ import Article from './Article';
 import { Routes, Route } from 'react-router-dom';
 import ReactTimeAgo from 'react-time-ago'
 
-const ArticleCard = ({ article_id, comment_count, title, author, created_at, votes, article_img_url }) => {
+const ArticleCard = ({ topic, article_id, comment_count, title, author, created_at, votes, article_img_url }) => {
+
+    const createdAt = Date.parse(created_at);
 
     return (
         <>
@@ -16,37 +18,36 @@ const ArticleCard = ({ article_id, comment_count, title, author, created_at, vot
             <Card id="article-card" style={{ width: '70%' }}>
 
                 <Card.Body>
-                    <Link to={`articles/${article_id}`} style={{ padding: '0.1rem', color: 'black', 'text-decoration': 'none' }}>
-                        <div class="container">
-                            <div class="wrapper">
-                                <div class="box a">
-                                    <Card.Subtitle className="mb-2 text-muted" style={{ padding: '0.5rem' }}>
-                                        <img id="comment-icon" src={user} alt="Image representing a user" />{" "}{author} {" "}
-                                    </Card.Subtitle>
-                                </div>
-                                <div class="box b">
-                                    <img id="comment-icon" src={clock} alt="Image representing a clock" />{" "}
-                                    <ReactTimeAgo date={created_at} locale="en-US" />
-                                </div>
-                            </div>
-                        </div>
+                    <Link to={`articles/${article_id}`} style={{ color: 'black', 'textDecoration': 'none' }}>
+                        <section className="container">
+                            <section className="wrapper">
+                                <section className="box a">
+                                        <img style={{ height: "1.5rem" }} src={user} alt="Image representing a user" /><b style={{ paddingLeft: "0.5rem" }}>{author}</b>
+                                </section>
+                                <section className="box b">
+                                    <img style={{ height: "1.5rem" }} src={clock} alt="Image representing a clock" />
+                                    <b style={{ paddingLeft: "0.5rem" }}>
+                                        <ReactTimeAgo date={createdAt} locale="en-US" />
+                                    </b>
+                                </section>
+                            </section>
+                        </section>
 
 
                         <Card.Img src={article_img_url} alt="Image corresponding to the article topic" ></Card.Img>
-                        <Card.Title style={{ padding: '0.8rem' }}>{title}</Card.Title>
-                        <div class="container">
-                            <div class="wrapper">
-                                <div class="box a">
-                                    <Card.Subtitle style={{ padding: '0.5rem' }} className="mb-2 text-muted">
-                                        <img id="comment-icon" src={vote} alt="Image representing votes count" />{votes}
-                                    </Card.Subtitle>
-
-                                </div>
-                                <div class="box b">
-                                    <img id="comment-icon" src={comment} alt="Image representing a comment" />{comment_count}
-                                </div>
-                            </div>
-                        </div>
+                        <Card.Title style={{ padding: '0.2rem' }}>{topic.toUpperCase()}: {title}</Card.Title>
+                        <section className="container">
+                            <section className="wrapper">
+                                <section className="box a">
+                                    <img style={{ height: "1.5rem" }} src={vote} alt="Image representing votes count" />
+                                    <b style={{ paddingLeft: "0.5rem" }}>{votes}</b>
+                                </section>
+                                <section className="box b">
+                                    <img style={{ height: "1.5rem" }} src={comment} alt="Image representing a comment" />
+                                    <b style={{paddingLeft: "0.5rem"}}>{comment_count}</b>
+                                </section>
+                            </section>
+                        </section>
 
                     </Link>
 
