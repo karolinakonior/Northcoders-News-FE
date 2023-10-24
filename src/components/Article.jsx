@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { getArticle } from '../api/api';
 import Card from 'react-bootstrap/Card';
@@ -12,6 +12,7 @@ import React from 'react'
 import ReactTimeAgo from 'react-time-ago'
 import CommentsList from './CommentsList';
 import { changeArticleVotes } from '../api/api';
+import { UsernameContext } from '../context/username-context';
 
 const Article = () => {
     const { article_id } = useParams()
@@ -22,6 +23,7 @@ const Article = () => {
     const [isSubtractDisabled, setIsSubtractDisabled] = useState(false);
     const [userVotes, setUserVotes] = useState(0)
     const [err, setErr] = useState(null);
+    const {username, setUsername} = useContext(UsernameContext)
 
     const createdAt = Date.parse(article.created_at);
 
@@ -38,20 +40,35 @@ const Article = () => {
             })
     }, [])
 
-    useEffect(() => {
+
+
+    const setDisabled = () => {
         if (userVotes > 0) {
-            setIsAddDisabled(true);
-            setIsSubtractDisabled(false)
-        } else if (userVotes < 0) {
-            setIsAddDisabled(false)
-            setIsSubtractDisabled(true)
-        } else {
-            setIsAddDisabled(false)
-            setIsSubtractDisabled(false)
-        }
-    }, [userVotes])
+                    setIsAddDisabled(true);
+                    setIsSubtractDisabled(false)
+                } else if (userVotes < 0) {
+                    setIsAddDisabled(false)
+                    setIsSubtractDisabled(true)
+                } else {
+                    setIsAddDisabled(false)
+                    setIsSubtractDisabled(false)
+                }
+    }
+    // useEffect(() => {
+    //     if (userVotes > 0) {
+    //         setIsAddDisabled(true);
+    //         setIsSubtractDisabled(false)
+    //     } else if (userVotes < 0) {
+    //         setIsAddDisabled(false)
+    //         setIsSubtractDisabled(true)
+    //     } else {
+    //         setIsAddDisabled(false)
+    //         setIsSubtractDisabled(false)
+    //     }
+    // }, [userVotes])
 
     const increaseVotes = (votes) => {
+
         setArticleVotes((currentVotes) => {
             return currentVotes + votes;
         })
@@ -59,6 +76,7 @@ const Article = () => {
         setUserVotes(currentVotes => {
             return currentVotes + votes
         })
+        
         return changeArticleVotes(article_id, votes)
             .catch((err) => {
                 setArticleVotes((currentVotes) => {
@@ -139,7 +157,7 @@ const Article = () => {
                             </section>
                         </section>
                     </Card.Body>
-                    <CommentsList article_id={article_id} />
+                    <CommentsList article_id={article_id}/>
                 </Card>
             </section>
         </>

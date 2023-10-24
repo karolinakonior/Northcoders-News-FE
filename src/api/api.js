@@ -24,3 +24,11 @@ export function changeArticleVotes(article_id, votes) {
 export function getUsers(username) {
   return articlesApi.get(`/users/${username}`)
 }
+
+export function postComment(article_id, username, commentBody) {
+  const body = {
+    "username": username,
+    "body": commentBody
+  }
+  return articlesApi.post(`/articles/${article_id}/comments`, body)
+}

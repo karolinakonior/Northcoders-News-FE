@@ -1,7 +1,7 @@
 .grid {
   display: grid;
-  grid-template-rows: 5rem 80% auto;
-  grid-template-columns: 12rem 80% auto;
+  grid-template-rows: 5rem 0.6% 0.6%;
+  grid-template-columns: 30% auto auto;
   grid-template-areas:
     "header header header"
     "sidebar article article"
@@ -10,13 +10,15 @@
 
 #article {
   grid-area: article;
+  height: 80%;
 }
 
 #header {
   background: #0B1416;
   grid-area: header;
+  color: white;
   height: 100%;
-  padding: 1.5rem;
+  padding: 0.5rem;
 }
 
 #sidebar {
@@ -28,7 +30,7 @@
 
 #article-card {
   height: auto;
-}
+} */
 
 #articles-title {
   padding: 1rem;
@@ -38,7 +40,7 @@
 #article-card-image {
   height: 12rem;
   margin: 1rem;
-}
+} 
 
 #comment-icon {
   height: 1rem;
@@ -71,4 +73,24 @@ button {
 #button-disabled {
   opacity: 0.65; 
   cursor: not-allowed;
+}
+
+#header-column {
+  display: grid;
+  grid-template-columns:  50% 50%;
+}
+
+#header-title {
+    grid-column: 1 / 2;
+    padding-left: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+#header-user {
+  grid-column: 2 / 2;
+  float: right;
+  margin: 0rem;
+  padding-right: 1rem;
+  text-align: right;
 }

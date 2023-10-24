@@ -6,8 +6,9 @@ const NavBar = () => {
         <>
             <div id="sidebar">
                 <Dropdown.Menu show>
-                <Dropdown.Item href="/" eventKey="1">Home</Dropdown.Item>
+                <Dropdown.Item eventKey="1"><Link to="/">Home</Link></Dropdown.Item>
                     <Dropdown.Divider />
+                    
                     <Dropdown.Item href="/signin" eventKey="2">Sign in</Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item eventKey="3">Football</Dropdown.Item>
