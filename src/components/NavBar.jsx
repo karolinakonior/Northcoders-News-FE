@@ -9,7 +9,7 @@ const NavBar = () => {
                 <Dropdown.Item eventKey="1"><Link to="/">Home</Link></Dropdown.Item>
                     <Dropdown.Divider />
                     
-                    <Dropdown.Item href="/signin" eventKey="2">Sign in</Dropdown.Item>
+                    <Dropdown.Item eventKey="2"><Link to="/signin">Sign in</Link></Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item eventKey="3">Football</Dropdown.Item>
                     <Dropdown.Divider />

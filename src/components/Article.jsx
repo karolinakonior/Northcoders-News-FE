@@ -13,6 +13,9 @@ import ReactTimeAgo from 'react-time-ago'
 import CommentsList from './CommentsList';
 import { changeArticleVotes } from '../api/api';
 import { UsernameContext } from '../context/username-context';
+import Button from 'react-bootstrap/Button';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 
 const Article = () => {
     const { article_id } = useParams()
@@ -23,7 +26,7 @@ const Article = () => {
     const [isAddDisabled, setIsAddDisabled] = useState(false);
     const [isSubtractDisabled, setIsSubtractDisabled] = useState(false);
     const [err, setErr] = useState(null);
-    const {username, setUsername} = useContext(UsernameContext)
+    const { username, setUsername } = useContext(UsernameContext)
 
     const createdAt = Date.parse(article.created_at);
 
@@ -105,12 +108,15 @@ const Article = () => {
                         <section className="container">
                             <section className="wrapper">
                                 <section className="box a">
-
-                                    <button className="button" id={isAddDisabled ? "button-disabled" : ""} disabled={isAddDisabled} onClick={(() => { handleVote(1) })}>
+                                <OverlayTrigger overlay={ <Tooltip id="tooltip-disabled">{username ? "Upvote" : "Sign in to vote!"}</Tooltip>}>
+                                    <button className="button" id={isAddDisabled ? "button-disabled" : ""} disabled={username ? isAddDisabled : true} onClick={(() => { handleVote(1) })} >
                                         <img style={{ height: "2rem" }} src={upvote} alt="Image representing votes count" /></button>
-                                    <button id={isSubtractDisabled ? "button-disabled" : ""} disabled={isSubtractDisabled} onClick={(() => { handleVote(-1) })}>
+                                        </OverlayTrigger>
+                                        <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">{username ? "Downvote" : "Sign in to vote!"}</Tooltip>}>
+                                    <button id={isSubtractDisabled ? "button-disabled" : ""} disabled={username ? isSubtractDisabled : true} onClick={(() => { handleVote(-1) })}>
                                         <img style={{ height: "2rem" }} src={downvote} alt="Image representing votes count" />
                                     </button>
+                                    </OverlayTrigger>
                                     <b style={{ paddingLeft: "0.5rem" }}>{articleVotes}</b>
                                     {err ? <p>{err}</p> : null}
                                 </section>
@@ -121,7 +127,7 @@ const Article = () => {
                             </section>
                         </section>
                     </Card.Body>
-                    <CommentsList article_id={article_id}/>
+                    <CommentsList article_id={article_id} />
                 </Card>
             </section>
         </>
