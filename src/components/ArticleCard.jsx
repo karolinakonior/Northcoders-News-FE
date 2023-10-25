@@ -8,6 +8,7 @@ import Article from './Article';
 import { Routes, Route } from 'react-router-dom';
 import ReactTimeAgo from 'react-time-ago'
 
+
 const ArticleCard = ({ topic, article_id, comment_count, title, author, created_at, votes, article_img_url }) => {
 
     const createdAt = Date.parse(created_at);
@@ -18,7 +19,7 @@ const ArticleCard = ({ topic, article_id, comment_count, title, author, created_
             <Card id="article-card" style={{ width: '70%' }}>
 
                 <Card.Body>
-                    <Link to={`articles/${article_id}`} style={{ color: 'black', 'textDecoration': 'none' }}>
+                    <Link to={`article/${article_id}`} style={{ color: 'black', 'textDecoration': 'none' }}>
                         <section className="container">
                             <section className="wrapper">
                                 <section className="box a">

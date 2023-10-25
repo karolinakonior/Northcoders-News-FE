@@ -1,7 +1,7 @@
 .grid {
   display: grid;
   grid-template-rows: 5rem 0.6% 0.6%;
-  grid-template-columns: 30% auto auto;
+  grid-template-columns: 15rem auto auto;
   grid-template-areas:
     "header header header"
     "sidebar article article"
@@ -22,8 +22,6 @@
 }
 
 #sidebar {
-  background: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
-  color: white;
   grid-area: sidebar;
   margin: 1rem;
 }

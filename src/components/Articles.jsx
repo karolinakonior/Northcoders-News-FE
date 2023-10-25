@@ -2,22 +2,41 @@ import { getArticles } from "../api/api";
 import { useEffect, useState } from "react";
 import ArticleCard from "./ArticleCard";
 import Spinner from 'react-bootstrap/Spinner';
+import {useParams} from "react-router-dom"
+import { getArticlesByTopic } from "../api/api"
 
 const Articles = () => {
     const [articles, setArticles] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+    const {topic} = useParams()
+    const [error, setError] = useState("")
 
     useEffect(() => {
         setIsLoading(true)
-        getArticles()
+        if(topic) {
+            getArticlesByTopic((topic))
+            .then(response => {
+                setIsLoading(false)
+                setArticles(response.data.articles)
+                setError("")
+            })
+            .catch((error) => {
+                setError("Something went wrong, please try again.")
+            })
+
+        } else {
+            getArticles()
             .then((response) => {
                 setIsLoading(false)
                 setArticles(response.data.articles)
+                setError("")
             })
             .catch((error) => {
-                console.log(error)
+                setError("Something went wrong, please try again.")
             })
-    }, [])
+        }
+     
+    }, [topic])
 
     if (isLoading) {
         return <>
@@ -30,7 +49,8 @@ const Articles = () => {
     return (
         <>
         <div id="article">
-            <h1 id="articles-title">ARTICLES</h1>
+            {error ? <p>{error}</p> : null}
+            <h1 id="articles-title">{topic ? topic.toUpperCase() : null} ARTICLES</h1>
             <ul>
                 {articles.map(article => {
                     return <ArticleCard key={article.article_id} comment_count={article.comment_count} title={article.title} author={article.author} created_at={article.created_at} votes={article.votes} article_img_url={article.article_img_url} article_id={article.article_id} topic={article.topic}/>

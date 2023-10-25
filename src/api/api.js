@@ -32,3 +32,11 @@ export function postComment(article_id, username, commentBody) {
   }
   return articlesApi.post(`/articles/${article_id}/comments`, body)
 }
+
+export function getTopics() {
+  return articlesApi.get(`/topics`)
+}
+
+export function getArticlesByTopic(topic) {
+  return articlesApi.get(`/articles?topic=${topic}`)
+}
