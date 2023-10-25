@@ -5,6 +5,8 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { postComment } from "../api/api";
 import Card from 'react-bootstrap/Card';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 
 
 const PostComment = ({article_id, comments, setComments}) => {
@@ -13,14 +15,19 @@ const PostComment = ({article_id, comments, setComments}) => {
     const [commentBody, setCommentbody] = useState("")
     const [message, setMessage] = useState("")
     const [error, setError] = useState("")
+    const [isPosting, setIsPosting] = useState(false)
+    const [isDisabled, setIsAddDisabled] = useState(false)
 
     const handleSubmit = (event) => {
         event.preventDefault();
         setError("")
         setMessage("")
+        setIsPosting(true)
         return postComment(article_id, username, commentBody)
         .then((response) => {
+          setIsPosting(false)
           setCommentbody("")
+          setIsAddDisabled(true)
             setComments((currentComments) => {
                 return [ response.data.comment, ...currentComments]
             })
@@ -53,9 +60,12 @@ const PostComment = ({article_id, comments, setComments}) => {
           />
           </Form.Group>
           </Row>
-          <Button variant="dark" type="submit">Add comment</Button>
+          <OverlayTrigger overlay={ <Tooltip id="tooltip-disabled">{isDisabled ? "You already commented on this article." : "Add a comment"}</Tooltip>}>
+          <Button disabled={isDisabled} variant="dark" type="submit">Add comment</Button>
+          </OverlayTrigger>
           <section style={{ paddingTop: '1rem', fontSize: "1.5rem"}}>
           </section>
+          {isPosting ? <Card.Title>Your comment is being posted...</Card.Title> : null}
           {error ? <Card.Title>{error}</Card.Title> : null}
           {message ? <Card.Title>{message}</Card.Title> : null}
           </Form>

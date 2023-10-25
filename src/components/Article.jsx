@@ -13,7 +13,6 @@ import ReactTimeAgo from 'react-time-ago'
 import CommentsList from './CommentsList';
 import { changeArticleVotes } from '../api/api';
 import { UsernameContext } from '../context/username-context';
-import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 
