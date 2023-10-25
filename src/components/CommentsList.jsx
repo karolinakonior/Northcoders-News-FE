@@ -1,13 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { getComments } from '../api/api';
 import Card from 'react-bootstrap/Card';
 import ReactTimeAgo from 'react-time-ago'
 import vote from '../images/vote-icon.png'
 import Spinner from 'react-bootstrap/Spinner';
+import { UsernameContext } from "../context/username-context";
+import PostComment from './PostComment';
+import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 
 const CommentsList = ({ article_id }) => {
     const [comments, setComments] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+    const {username, setUsername} = useContext(UsernameContext)
 
     function parseCommentCreatedAt(comment){
         return Date.parse(comment.created_at);
@@ -36,7 +41,7 @@ const CommentsList = ({ article_id }) => {
 
     return (
         <>
-            <h3 style={{ padding: '0.5rem', margin: '1rem', 'fontSize': '2rem' }}>Comments:</h3>
+            {username ? <PostComment article_id={article_id} comments={comments} setComments={setComments} /> : <Button variant="dark"><Link style={{color: "white", textDecoration: "none"}} to="/signin">Sign in to post a comment!</Link></Button>}
             {comments.map((comment) => {
                 return (
                     <Card style={{ width: '100%' }} key={comment.comment_id}>

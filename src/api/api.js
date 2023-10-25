@@ -20,3 +20,15 @@ export function changeArticleVotes(article_id, votes) {
   const product = { "inc_votes": votes};
   return articlesApi.patch(`https://northcoders-news-api-ibfk.onrender.com/api/articles/${article_id}`, product)
 }
+
+export function getUsers(username) {
+  return articlesApi.get(`/users/${username}`)
+}
+
+export function postComment(article_id, username, commentBody) {
+  const body = {
+    "username": username,
+    "body": commentBody
+  }
+  return articlesApi.post(`/articles/${article_id}/comments`, body)
+}
