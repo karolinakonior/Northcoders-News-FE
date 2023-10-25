@@ -32,10 +32,11 @@ const CommentsList = ({ article_id }) => {
 
     if (isLoading) {
         return <>
-            <Spinner animation="border" role="status">
-                <span className="visually-hidden">Loading...</span>
-            </Spinner>
-            <h4>Loading...</h4>
+            <div style={{ paddingTop: "2rem", paddingLeft: "2rem", size: "20rem" }}>
+                <Spinner animation="border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </Spinner>
+            </div>
         </>
     }
 

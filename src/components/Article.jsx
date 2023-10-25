@@ -72,17 +72,18 @@ const Article = () => {
 
     if (isLoading) {
         return <>
-            <Spinner animation="border" role="status">
-                <span className="visually-hidden">Loading...</span>
-            </Spinner>
-            <h4>Loading...</h4>
+            <div style={{ paddingTop: "2rem", size: "20rem" }}>
+                <Spinner animation="border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </Spinner>
+            </div>
         </>
     }
 
     return (
         <>
-            <section id="article">
-                <Card.Title style={{ padding: '0.5rem', margin: '1rem', 'fontSize': '2rem', width: '80%' }}>{article.topic.toUpperCase()}: {article.title}</Card.Title>
+            <section id="article" style={{ paddingLeft: "12rem", width: "98%" }}>
+                <Card.Title style={{ 'fontSize': '2rem', paddingBottom: "1rem" }}>{article.topic.toUpperCase()}: {article.title}</Card.Title>
                 <Card id="article-card" style={{ width: '80%' }}>
                     <Card.Body>
                         <section className="container">

@@ -5,6 +5,7 @@ import Articles from './components/Articles'
 import { Routes, Route } from 'react-router-dom';
 import Article from './components/Article';
 import SignIn from './components/SignIn';
+import Homepage from './components/Homepage';
 
 function App() {
 
@@ -15,11 +16,12 @@ function App() {
         <NavBar />
       
         <Routes>
-        <Route exact path="/" element={<Articles />} />
-        <Route exact path="/home" element={<Articles />} />
+        <Route exact path="/" element={<Homepage />} />
+        <Route exact path="/home" element={<Homepage />} />
         <Route exact path="/signin" element={<SignIn />} />
-        <Route exact path="/articles" element={<Articles />} />
-        <Route path="/articles/:article_id" element={<Article />} />
+        <Route exact path="/articles/all/*" element={<Articles />} />
+        <Route exact path="/articles/:topic" element={<Articles />} />
+        <Route path="/articles/:topic/article/:article_id" element={<Article />} />
         <Route path="/*" element={<p>path not found...</p>} />
       </Routes>
       </div>
