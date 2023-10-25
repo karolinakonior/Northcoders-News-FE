@@ -16,7 +16,7 @@ const ArticleCard = ({ topic, article_id, comment_count, title, author, created_
     return (
         <>
 
-            <Card id="article-card" style={{ width: '90%' }}>
+            <Card id="article-card" style={{ width: '90%' }} className="box box-child">
 
                 <Card.Body>
                     <Link to={`article/${article_id}`} style={{ color: 'black', 'textDecoration': 'none' }}>
