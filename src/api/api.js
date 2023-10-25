@@ -17,7 +17,7 @@ export function getComments(article_id) {
 }
 
 export function changeArticleVotes(article_id, votes) {
-  const product = { "inc_votes": votes};
+  const product = { "inc_votes": votes };
   return articlesApi.patch(`https://northcoders-news-api-ibfk.onrender.com/api/articles/${article_id}`, product)
 }
 
@@ -39,4 +39,13 @@ export function getTopics() {
 
 export function getArticlesByTopic(topic) {
   return articlesApi.get(`/articles?topic=${topic}`)
+}
+
+export function getArticlesBySortTerm(topic = "", sortByTerm = "", order = "") {
+  if (sortByTerm === null || order === null) {
+    order = "desc"
+    sortByTerm = "created_at"
+  }
+
+  return articlesApi.get(`/articles?topic=${topic}&sort_by=${sortByTerm}&order=${order}`)
 }

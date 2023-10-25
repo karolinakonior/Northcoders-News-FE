@@ -4,6 +4,8 @@ import ArticleCard from "./ArticleCard";
 import Spinner from 'react-bootstrap/Spinner';
 import {useParams} from "react-router-dom"
 import { getArticlesByTopic } from "../api/api"
+import SortArticles from "./SortArticles";
+import { useSearchParams } from "react-router-dom";
 
 const Articles = () => {
     const [articles, setArticles] = useState([])
@@ -53,6 +55,7 @@ const Articles = () => {
         <div id="article">
             {error ? <p>{error}</p> : null}
             <h1 style={{ paddingLeft: "12rem"}}>{topic ? topic.toUpperCase() : null} ARTICLES</h1>
+            <SortArticles articles={articles} setArticles={setArticles} topic={topic}/>
             <ul className="flex" style={{ paddingLeft: "12rem"}}>
                 {articles.map(article => {
                     return <ArticleCard key={article.article_id} comment_count={article.comment_count} title={article.title} author={article.author} created_at={article.created_at} votes={article.votes} article_img_url={article.article_img_url} article_id={article.article_id} topic={article.topic}/>
