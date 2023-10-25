@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getArticle } from '../api/api';
 import Card from 'react-bootstrap/Card';
@@ -12,20 +12,16 @@ import React from 'react'
 import ReactTimeAgo from 'react-time-ago'
 import CommentsList from './CommentsList';
 import { changeArticleVotes } from '../api/api';
-import { UsernameContext } from '../context/username-context';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Tooltip from 'react-bootstrap/Tooltip';
 
 const Article = () => {
     const { article_id } = useParams()
     const [article, setArticle] = useState({})
     const [isLoading, setIsLoading] = useState(true)
     const [articleVotes, setArticleVotes] = useState(0)
-    const [userVotes, setUserVotes] = useState(0)
     const [isAddDisabled, setIsAddDisabled] = useState(false);
     const [isSubtractDisabled, setIsSubtractDisabled] = useState(false);
+    const [userVotes, setUserVotes] = useState(0)
     const [err, setErr] = useState(null);
-    const { username, setUsername } = useContext(UsernameContext)
 
     const createdAt = Date.parse(article.created_at);
 
@@ -42,30 +38,50 @@ const Article = () => {
             })
     }, [])
 
-    const handleUserVotes = (vote) => {
-        if (userVotes + vote > 0) {
+    useEffect(() => {
+        if (userVotes > 0) {
             setIsAddDisabled(true);
             setIsSubtractDisabled(false)
-        } else if (userVotes + vote < 0) {
+        } else if (userVotes < 0) {
             setIsAddDisabled(false)
             setIsSubtractDisabled(true)
         } else {
             setIsAddDisabled(false)
             setIsSubtractDisabled(false)
         }
-        setUserVotes((userVotes + vote));
-    }
+    }, [userVotes])
 
-    const handleVote = (vote) => {
-        setArticleVotes((articleVotes + vote));
+    const increaseVotes = (votes) => {
+        setArticleVotes((currentVotes) => {
+            return currentVotes + votes;
+        })
 
-        handleUserVotes(vote);
-
-        return changeArticleVotes(article_id, vote)
+        setUserVotes(currentVotes => {
+            return currentVotes + votes
+        })
+        return changeArticleVotes(article_id, votes)
             .catch((err) => {
                 setArticleVotes((currentVotes) => {
                     setErr('Something went wrong, please try again.');
-                    return currentVotes += vote;
+                    return currentVotes - 1;
+                })
+            })
+    }
+
+    const decreaseVotes = (votes) => {
+        setArticleVotes((currentVotes) => {
+            return currentVotes + votes;
+        })
+
+        setUserVotes(currentVotes => {
+            return currentVotes + votes
+        })
+
+        return changeArticleVotes(article_id, votes)
+            .catch((err) => {
+                setArticleVotes((currentVotes) => {
+                    setErr('Something went wrong, please try again.');
+                    return currentVotes + 1;
                 })
             })
     }
@@ -81,10 +97,10 @@ const Article = () => {
 
     return (
         <>
-            <section id="article">
-                <Card.Title style={{ padding: '0.5rem', margin: '1rem', 'fontSize': '2rem', width: '80%' }}>{article.topic.toUpperCase()}: {article.title}</Card.Title>
-                <Card id="article-card" style={{ width: '80%' }}>
-                    <Card.Body>
+            <section id="article" style={{ paddingLeft: "12rem", width: "98%"}}>
+                <Card.Title style={{'fontSize': '2rem', paddingBottom: "1rem" }}>{article.topic.toUpperCase()}: {article.title}</Card.Title>
+                <Card id="article-card" style={{ width: '90%' }}>
+                    <Card.Body >
                         <section className="container">
                             <section className="wrapper">
                                 <section className="box a">
@@ -107,15 +123,12 @@ const Article = () => {
                         <section className="container">
                             <section className="wrapper">
                                 <section className="box a">
-                                <OverlayTrigger overlay={ <Tooltip id="tooltip-disabled">{username ? "Upvote" : "Sign in to vote!"}</Tooltip>}>
-                                    <button className="button" id={isAddDisabled ? "button-disabled" : ""} disabled={username ? isAddDisabled : true} onClick={(() => { handleVote(1) })} >
+
+                                    <button className="button" id={isAddDisabled ? "button-disabled" : ""} disabled={isAddDisabled} onClick={(() => { increaseVotes(1) })}>
                                         <img style={{ height: "2rem" }} src={upvote} alt="Image representing votes count" /></button>
-                                        </OverlayTrigger>
-                                        <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">{username ? "Downvote" : "Sign in to vote!"}</Tooltip>}>
-                                    <button id={isSubtractDisabled ? "button-disabled" : ""} disabled={username ? isSubtractDisabled : true} onClick={(() => { handleVote(-1) })}>
+                                    <button id={isSubtractDisabled ? "button-disabled" : ""} disabled={isSubtractDisabled} onClick={(() => { decreaseVotes(-1) })}>
                                         <img style={{ height: "2rem" }} src={downvote} alt="Image representing votes count" />
                                     </button>
-                                    </OverlayTrigger>
                                     <b style={{ paddingLeft: "0.5rem" }}>{articleVotes}</b>
                                     {err ? <p>{err}</p> : null}
                                 </section>

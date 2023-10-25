@@ -1,7 +1,7 @@
 .grid {
   display: grid;
-  grid-template-rows: 5rem 0.6% 0.6%;
-  grid-template-columns: 15rem auto auto;
+  grid-template-rows: 5rem ;
+  
   grid-template-areas:
     "header header header"
     "sidebar article article"
@@ -10,7 +10,8 @@
 
 #article {
   grid-area: article;
-  height: 80%;
+  padding-left: 1rem;
+  padding-top: 1rem;
 }
 
 #header {
@@ -28,11 +29,11 @@
 
 #article-card {
   height: auto;
+  padding-left: 0rem;
 } */
 
 #articles-title {
-  padding: 1rem;
-  margin-left: 2rem;
+background-color: black;
 }
 
 #article-card-image {
@@ -76,6 +77,7 @@ button {
 #header-column {
   display: grid;
   grid-template-columns:  50% 50%;
+  
 }
 
 #header-title {
@@ -83,6 +85,7 @@ button {
     padding-left: 1rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
+    
 }
 
 #header-user {
