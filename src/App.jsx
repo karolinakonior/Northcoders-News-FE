@@ -6,6 +6,7 @@ import { Routes, Route } from 'react-router-dom';
 import Article from './components/Article';
 import SignIn from './components/SignIn';
 import Homepage from './components/Homepage';
+import Error from './components/Error';
 
 function App() {
 
@@ -17,12 +18,13 @@ function App() {
       
         <Routes>
         <Route exact path="/" element={<Homepage />} />
+        <Route exact path="/error" element={<Error />} />
         <Route exact path="/home" element={<Homepage />} />
         <Route exact path="/signin" element={<SignIn />} />
         <Route exact path="/articles/all/*" element={<Articles />} />
         <Route path="/articles/:topic" element={<Articles />} />
         <Route path="/articles/:topic/article/:article_id" element={<Article />} />
-        <Route path="/*" element={<p>path not found...</p>} />
+        <Route path="/*" element={<b style={{ paddingTop: "2rem", paddingLeft: "2rem" }}>Path not found...</b>} />
       </Routes>
       </div>
     </>

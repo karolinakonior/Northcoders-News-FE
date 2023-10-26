@@ -15,6 +15,7 @@ import { changeArticleVotes } from '../api/api';
 import { UsernameContext } from '../context/username-context';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
+import { useNavigate } from "react-router-dom";
 
 const Article = () => {
     const { article_id } = useParams()
@@ -26,6 +27,7 @@ const Article = () => {
     const [isSubtractDisabled, setIsSubtractDisabled] = useState(false);
     const [err, setErr] = useState(null);
     const { username, setUsername } = useContext(UsernameContext)
+    const nav = useNavigate();
 
     const createdAt = Date.parse(article.created_at);
 
@@ -33,9 +35,14 @@ const Article = () => {
         setIsLoading(true)
         getArticle(article_id)
             .then((response) => {
-                setIsLoading(false)
-                setArticle(response.data.article)
-                setArticleVotes(response.data.article.votes)
+                console.log(response, "response")
+                if (Object.keys(response.data).length === 0) {
+                    nav(`/error`);
+                } else {
+                    setArticle(response.data.article)
+                    setArticleVotes(response.data.article.votes)
+                }
+                setIsLoading(false)      
             })
             .catch((err) => {
                 setErr('Something went wrong, please try again.');
