@@ -22,7 +22,7 @@ function App() {
         <Route exact path="/home" element={<Homepage />} />
         <Route exact path="/signin" element={<SignIn />} />
         <Route exact path="/articles/all/*" element={<Articles />} />
-        <Route path="/articles/:topic" element={<Articles />} />
+        <Route path="/articles/:topic/*" element={<Articles />} />
         <Route path="/articles/:topic/article/:article_id" element={<Article />} />
         <Route path="/*" element={<b style={{ paddingTop: "2rem", paddingLeft: "2rem" }}>Path not found...</b>} />
       </Routes>

@@ -68,8 +68,8 @@ const CommentsList = ({ article_id }) => {
     return (
         <>
             {username ? <PostComment article_id={article_id} comments={comments} setComments={setComments} /> : <Button variant="dark"><Link style={{ color: "white", textDecoration: "none" }} to="/signin">Sign in to post a comment!</Link></Button>}
-            <Card.Title class="card-title h5" style={{ paddingLeft: '1rem', paddingBottom: '1rem' }}>{message ? message : null}</Card.Title>
-            <Card.Title class="card-title h5" style={{ paddingLeft: '1rem', paddingBottom: '1rem' }}>{error ? error : null}</Card.Title>
+            <Card.Title className="card-title h5" style={{ paddingLeft: '1rem', paddingBottom: '1rem' }}>{message ? message : null}</Card.Title>
+            <Card.Title className="card-title h5" style={{ paddingLeft: '1rem', paddingBottom: '1rem' }}>{error ? error : null}</Card.Title>
             {comments.map((comment) => {
                 return (
                     <Card style={{ width: '100%' }} key={comment.comment_id}>

@@ -35,7 +35,6 @@ const Article = () => {
         setIsLoading(true)
         getArticle(article_id)
             .then((response) => {
-                console.log(response, "response")
                 if (Object.keys(response.data).length === 0) {
                     nav(`/error`);
                 } else {
