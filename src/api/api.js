@@ -49,3 +49,7 @@ export function getArticlesBySortTerm(topic = "", sortByTerm = "", order = "") {
 
   return articlesApi.get(`/articles?topic=${topic}&sort_by=${sortByTerm}&order=${order}`)
 }
+
+export function deleteComment (comment_id) {
+  return articlesApi.delete(`/comments/${comment_id}`)
+}
