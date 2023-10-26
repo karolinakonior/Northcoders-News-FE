@@ -1,7 +1,7 @@
 .grid {
   display: grid;
-  grid-template-rows: 5rem ;
-  
+  grid-template-rows: 5rem;
+
   grid-template-areas:
     "header header header"
     "sidebar article article"
@@ -30,16 +30,16 @@
 #article-card {
   height: auto;
   padding-left: 0rem;
-} */
+}
 
-#articles-title {
-background-color: black;
+*/ #articles-title {
+  background-color: black;
 }
 
 #article-card-image {
   height: 12rem;
   margin: 1rem;
-} 
+}
 
 #comment-icon {
   height: 1rem;
@@ -47,11 +47,11 @@ background-color: black;
 
 .wrapper {
   display: grid;
-  grid-template-columns: 50% 50%;	
+  grid-template-columns: 50% 50%;
 }
 
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .b {
@@ -59,33 +59,32 @@ background-color: black;
 }
 
 .container {
-	height: 2.5rem;
+  height: 2.5rem;
 }
 
 button {
-  padding:0.1em 0.1em;
-  background-color:#ffffff;
-  border:0;
-  cursor:pointer;
+  padding: 0.1em 0.1em;
+  background-color: #ffffff;
+  border: 0;
+  cursor: pointer;
 }
 
 #button-disabled {
-  opacity: 0.65; 
+  opacity: 0.65;
   cursor: not-allowed;
 }
 
 #header-column {
   display: grid;
-  grid-template-columns:  50% 50%;
-  
+  grid-template-columns: 50% 50%;
 }
 
 #header-title {
-    grid-column: 1 / 2;
-    padding-left: 1rem;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    
+  grid-column: 1 / 2;
+  padding-left: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
 }
 
 #header-user {
@@ -94,4 +93,43 @@ button {
   margin: 0rem;
   padding-right: 1rem;
   text-align: right;
+}
+
+#articles-title-block {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-areas:
+    "articles-title dropdown-grid";
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+#articles-title {
+  grid-column: 1 / 2;
+}
+
+.dropdown {
+  grid-column: 2 / 2;
+}
+
+#dropdown-basic {
+  display: flex;
+  align-items: center;
+  grid-column: 1 / 2;
+}
+
+.dropdown-grid {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-areas:
+    "dropdown-basic sorting-text";
+  align-items: right;
+  padding-left: 1rem;
+}
+
+.sorting-text {
+  grid-column: 2 / 2;
+  max-width: 10rem;
+  padding-top: 0.5rem;
 }
