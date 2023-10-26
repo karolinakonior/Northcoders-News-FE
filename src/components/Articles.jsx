@@ -46,6 +46,7 @@ const Articles = () => {
                 <Spinner animation="border" role="status">
                     <span className="visually-hidden">Loading...</span>
                 </Spinner>
+                <p style={{paddingTop: "3rem"}}>Please wait - the articles are taking longer to load on a first render.</p>
             </div>
         </>
     }
