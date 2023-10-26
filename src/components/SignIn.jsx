@@ -48,7 +48,7 @@ const SignIn = () => {
             <Form.Control
               required
               type="text"
-              placeholder="username"
+              placeholder="tickle122"
               onChange={handleChange}
             />
           </Form.Group>

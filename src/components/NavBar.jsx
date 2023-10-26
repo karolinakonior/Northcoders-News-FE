@@ -48,15 +48,16 @@ const NavBar = () => {
 
                         {topics.map((topic, index) => {
                             return (
-
+                                <section key={index}>
                                 <Link to={`/articles/${topic.slug}`} style={{color: "black", textDecoration: "none"}}>
-                                    <Card>
+                                    <Card >
                                         <Card.Body>
                                             <Card.Title key={index} style={{ padding: '0.2rem' }}>
                                                 {topic.slug.toUpperCase()}</Card.Title>
                                         </Card.Body>
                                     </Card>
                                 </Link>
+                                </section>
                             )
                         })}
 
