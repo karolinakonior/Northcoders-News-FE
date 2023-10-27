@@ -1,28 +1,15 @@
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from "react"
-import { getTopics } from "../api/api"
+import { useState } from "react"
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Card from 'react-bootstrap/Card';
 
 
-const NavBar = () => {
-    const [topics, setTopics] = useState([])
-    const [error, setError] = useState("")
+const NavBar = ({topics, error}) => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
-    useEffect(() => {
-        getTopics()
-            .then((response) => {
-                setTopics(response.data.topics)
-            })
-            .catch((error) => {
-                setError("Something went wrong. Please try again later.")
-            })
-    }, [])
 
     return (
         <>
@@ -46,6 +33,15 @@ const NavBar = () => {
                             </Link>
                         </Card>
 
+                        <Card>
+                            <Link to="/signin" style={{color: "black", textDecoration: "none"}}>
+                                <Card.Body>
+                                    <Card.Title style={{ padding: '0.2rem' }}> SIGN IN
+                                    </Card.Title>
+                                </Card.Body>
+                            </Link>
+                        </Card>
+
                         {topics.map((topic, index) => {
                             return (
                                 <section key={index}>
@@ -62,18 +58,9 @@ const NavBar = () => {
                         })}
 
                         <Card>
-                            <Link to="/signin" style={{color: "black", textDecoration: "none"}}>
-                                <Card.Body>
-                                    <Card.Title style={{ padding: '0.2rem' }}> SIGN IN
-                                    </Card.Title>
-                                </Card.Body>
-                            </Link>
-                        </Card>
-
-                        <Card>
                             <Link style={{color: "black", textDecoration: "none"}} to="/postarticle">
                                 <Card.Body>
-                                    <Card.Title style={{ padding: '0.2rem' }}> POST ARTICLE
+                                    <Card.Title style={{ padding: '0.2rem' }}> POST AN ARTICLE
                                     </Card.Title>
                                 </Card.Body>
                             </Link>
