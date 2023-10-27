@@ -20,7 +20,7 @@ const PostComment = ({ article_id, comments, setComments }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if(/^[\s]+$/.test(commentBody)) {
+    if (/^[\s]+$/.test(commentBody)) {
       setError("Comment is empty. Please try again.")
     } else {
       setError("")

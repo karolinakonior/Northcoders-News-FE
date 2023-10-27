@@ -5,6 +5,7 @@ import { getUsers } from "../api/api";
 const Header = () => {
     const { username, setUsername } = useContext(UsernameContext);
     const [userInfo, setUserInfo] = useState(null);
+    const [err, setErr] = useState("")
 
     useEffect(() => {
         getUsers(username)
@@ -12,7 +13,7 @@ const Header = () => {
                 setUserInfo(response.data.user)
             })
             .catch((err) => {
-                console.log(err)
+                setErr("Something went wrong, please try again.")
             })
     }, [username]);
 
@@ -23,6 +24,7 @@ const Header = () => {
                     <section id="header-title-user">
                         <section id="header-title">
                             <h1>NC-News</h1>
+                            {err ? err : null}
                         </section>
                         </section>
                         <section id="header-user">
