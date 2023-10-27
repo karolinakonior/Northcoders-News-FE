@@ -20,22 +20,26 @@ const PostComment = ({ article_id, comments, setComments }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setError("")
-    setMessage("")
-    setIsPosting(true)
-    return postComment(article_id, username, commentBody)
-      .then((response) => {
-        setIsPosting(false)
-        setCommentbody("")
-        setIsAddDisabled(true)
-        setComments((currentComments) => {
-          return [response.data.comment, ...currentComments]
+    if(/^[\s]+$/.test(commentBody)) {
+      setError("Comment is empty. Please try again.")
+    } else {
+      setError("")
+      setMessage("")
+      setIsPosting(true)
+      return postComment(article_id, username, commentBody)
+        .then((response) => {
+          setIsPosting(false)
+          setCommentbody("")
+          setIsAddDisabled(true)
+          setComments((currentComments) => {
+            return [response.data.comment, ...currentComments]
+          })
+          setMessage("Comment sucessfully added!")
         })
-        setMessage("Comment sucessfully added!")
-      })
-      .catch((error) => {
-        setError("Something went wrong, please try again.")
-      })
+        .catch((error) => {
+          setError("Something went wrong, please try again.")
+        })
+    }
   };
 
   const handleChange = (event) => {
@@ -53,6 +57,7 @@ const PostComment = ({ article_id, comments, setComments }) => {
             <Form.Control rows={3} as="textarea"
               required
               type="text"
+              name="comment"
               placeholder="Add comment..."
               value={commentBody || ""}
               onChange={handleChange}

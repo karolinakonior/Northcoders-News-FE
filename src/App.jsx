@@ -19,6 +19,7 @@ function App() {
         <Routes>
         <Route exact path="/" element={<Homepage />} />
         <Route exact path="/error" element={<Error />} />
+        <Route exact path="/topicerror" element={<Error />} />
         <Route exact path="/home" element={<Homepage />} />
         <Route exact path="/signin" element={<SignIn />} />
         <Route exact path="/articles/all/*" element={<Articles />} />

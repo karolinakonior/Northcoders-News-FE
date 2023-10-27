@@ -1,6 +1,6 @@
 import { getUsers } from "../api/api";
 import { UsernameContext } from "../context/username-context";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';

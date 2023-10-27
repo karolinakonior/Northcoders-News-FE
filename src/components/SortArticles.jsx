@@ -42,7 +42,7 @@ const SortArticles = ({ articles, setArticles, topic }) => {
         setError("")
     }
 
-    //setTimeout(handleError, 4000);
+    setTimeout(handleError, 4000);
 
     return (
         <>

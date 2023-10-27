@@ -33,6 +33,9 @@ const Article = () => {
 
     useEffect(() => {
         setIsLoading(true)
+        if (/[a-z]+/i.test(article_id)) {
+            nav(`/error`);
+        }
         getArticle(article_id)
             .then((response) => {
                 if (Object.keys(response.data).length === 0) {
