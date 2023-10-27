@@ -24,10 +24,6 @@ const CommentsList = ({ article_id }) => {
     const [error, setError] = useState("")
     const [isDisabled, setIsDisabled] = useState(null)
 
-    // function parseCommentCreatedAt(comment) {
-    //     return Date.parse(comment.created_at);
-    // }
-
     useEffect(() => {
         setIsDisabled(true)
         setIsLoading(true)
@@ -40,23 +36,6 @@ const CommentsList = ({ article_id }) => {
                 setError("Something went wrong, please try again.")
             })
     }, [])
-
-    // const handleClick = (comment_id) => {
-    //     setIsDisabled(true)
-    //     setMessage("Comment is being deleted - please wait.")
-    //     deleteComment(comment_id)
-    //         .then(() => {
-    //             getComments(article_id)
-    //                 .then((response) => {
-    //                     setIsLoading(false)
-    //                     setComments(response.data.comments)
-    //                     setMessage("Comment succesfully deleted!")
-    //                 })
-    //                 .catch((error) => {
-    //                     setError("Something went wrong, please try again.")
-    //                 })
-    //         })
-    // }
 
     if (isLoading) {
         return <>
@@ -79,49 +58,6 @@ const CommentsList = ({ article_id }) => {
                         return <Comment key={comment.comment_id} comment_id={comment.comment_id} votes={comment.votes} created_at={comment.created_at} author={comment.author} body={comment.body} article_id={article_id} comments={comments} setComments={setComments}/>
                     })}
                 </ul>
-{/* 
-            {comments.map((comment) => {
-                return (
-                    <Card style={{ width: '100%' }} key={comment.comment_id}>
-                        <Card.Body>
-                            <section className="container">
-                                <section className="wrapper">
-                                    <section className="box a">
-                                        <Card.Title>{comment.author}</Card.Title>
-                                    </section>
-                                    <section className="box b">
-                                        <Card.Subtitle className="mb-2 text-muted"><ReactTimeAgo date={parseCommentCreatedAt(comment)} locale="en-US" /></Card.Subtitle>
-                                    </section>
-                                </section>
-                            </section>
-                            <Card.Text>
-                                {comment.body}
-                            </Card.Text>
-
-                            <section className="container">
-                                <section className="wrapper">
-
-                                    <section className="box a">
-                                       
-                                            <img style={{ color: "white", height: "1.5rem" }} id="comment-icon" src={upvote} alt="Image representing votes count" />
-                                            <img style={{ color: "white", height: "1.5rem" }} id="comment-icon" src={downvote} alt="Image representing votes count" />
-                                            <b style={{paddingLeft: "0.5rem"}}>{comment.votes}</b>
-                                    </section>
-
-                                    <section className="box b">
-                                        <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">{username ? (username === comment.author ? "Delete" : "You can delete only your comment!") : "Sign in to delete"}</Tooltip>}>
-                                            <button className="button" onClick={(() => { handleClick(comment.comment_id) })} 
-                                            disabled={username === comment.author && isDisabled ? false : true}>
-                                                <img id="remove-icon" src={remove} style={{ color: "white", height: "1.5rem" }} alt="Image representing delete icon" /></button>
-                                        </OverlayTrigger>
-                                    </section>
-                                </section>
-                            </section>
-
-                        </Card.Body>
-                    </Card>
-                )
-            })} */}
         </>
     );
 }

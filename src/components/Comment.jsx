@@ -127,6 +127,7 @@ const Comment = ({ comment_id, votes, created_at, author, body, article_id, comm
                                     </button>
                                 </OverlayTrigger>
                                 <b style={{ paddingLeft: "0.5rem" }}>{commentVotes}</b>
+                                {error ? <p>{error}</p> : null}
                             </section>
                             <section className="box b">
                                 <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">{username ? (username === author ? "Delete" : "You can delete only your comment!") : "Sign in to delete"}</Tooltip>}>
