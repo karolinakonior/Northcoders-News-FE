@@ -69,6 +69,15 @@ const NavBar = () => {
                                 </Card.Body>
                             </Link>
                         </Card>
+
+                        <Card>
+                            <Link style={{color: "black", textDecoration: "none"}} to="/postarticle">
+                                <Card.Body>
+                                    <Card.Title style={{ padding: '0.2rem' }}> POST ARTICLE
+                                    </Card.Title>
+                                </Card.Body>
+                            </Link>
+                        </Card>
                     </Offcanvas.Body>
                 </Offcanvas>
             </section>
