@@ -13,6 +13,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import downvote from '../images/downvote.png'
 import upvote from '../images/upvote.png'
+import Comment from "./Comment";
 
 
 const CommentsList = ({ article_id }) => {
@@ -23,9 +24,9 @@ const CommentsList = ({ article_id }) => {
     const [error, setError] = useState("")
     const [isDisabled, setIsDisabled] = useState(null)
 
-    function parseCommentCreatedAt(comment) {
-        return Date.parse(comment.created_at);
-    }
+    // function parseCommentCreatedAt(comment) {
+    //     return Date.parse(comment.created_at);
+    // }
 
     useEffect(() => {
         setIsDisabled(true)
@@ -40,22 +41,22 @@ const CommentsList = ({ article_id }) => {
             })
     }, [])
 
-    const handleClick = (comment_id) => {
-        setIsDisabled(true)
-        setMessage("Comment is being deleted - please wait.")
-        deleteComment(comment_id)
-            .then(() => {
-                getComments(article_id)
-                    .then((response) => {
-                        setIsLoading(false)
-                        setComments(response.data.comments)
-                        setMessage("Comment succesfully deleted!")
-                    })
-                    .catch((error) => {
-                        setError("Something went wrong, please try again.")
-                    })
-            })
-    }
+    // const handleClick = (comment_id) => {
+    //     setIsDisabled(true)
+    //     setMessage("Comment is being deleted - please wait.")
+    //     deleteComment(comment_id)
+    //         .then(() => {
+    //             getComments(article_id)
+    //                 .then((response) => {
+    //                     setIsLoading(false)
+    //                     setComments(response.data.comments)
+    //                     setMessage("Comment succesfully deleted!")
+    //                 })
+    //                 .catch((error) => {
+    //                     setError("Something went wrong, please try again.")
+    //                 })
+    //         })
+    // }
 
     if (isLoading) {
         return <>
@@ -72,6 +73,13 @@ const CommentsList = ({ article_id }) => {
             {username ? <PostComment article_id={article_id} comments={comments} setComments={setComments} /> : <Button variant="dark"><Link style={{ color: "white", textDecoration: "none" }} to="/signin">Sign in to post a comment!</Link></Button>}
             <Card.Title className="card-title h5" style={{ paddingLeft: '1rem', paddingBottom: '1rem' }}>{message ? message : null}</Card.Title>
             <Card.Title className="card-title h5" style={{ paddingLeft: '1rem', paddingBottom: '1rem' }}>{error ? error : null}</Card.Title>
+
+            <ul className="comment-body">
+                    {comments.map(comment => {
+                        return <Comment key={comment.comment_id} comment_id={comment.comment_id} votes={comment.votes} created_at={comment.created_at} author={comment.author} body={comment.body} article_id={article_id} comments={comments} setComments={setComments}/>
+                    })}
+                </ul>
+{/* 
             {comments.map((comment) => {
                 return (
                     <Card style={{ width: '100%' }} key={comment.comment_id}>
@@ -113,7 +121,7 @@ const CommentsList = ({ article_id }) => {
                         </Card.Body>
                     </Card>
                 )
-            })}
+            })} */}
         </>
     );
 }
