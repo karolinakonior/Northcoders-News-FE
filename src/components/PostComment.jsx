@@ -48,9 +48,9 @@ const PostComment = ({ article_id, comments, setComments }) => {
 
   return (
     <>
-      <Form onSubmit={handleSubmit} style={{ paddingLeft: '1rem', paddingBottom: '1rem' }}>
+      <Form onSubmit={handleSubmit} style={{ paddingRight: '1rem', paddingLeft: '1rem', paddingBottom: '1rem' }}>
         <Row className="mb-3" >
-          <Form.Group style={{ width: '30rem' }}>
+          <Form.Group style={{ width: '100%' }}>
             <Form.Label style={{ paddingTop: '2rem', fontSize: "2rem" }}>
               <Card.Title>Enter your comment</Card.Title>
             </Form.Label>
@@ -61,7 +61,7 @@ const PostComment = ({ article_id, comments, setComments }) => {
               placeholder="Add comment..."
               value={commentBody || ""}
               onChange={handleChange}
-              style={{ height: "8rem" }}
+              style={{ height: "8rem"}}
             />
           </Form.Group>
         </Row>

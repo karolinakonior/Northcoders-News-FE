@@ -133,3 +133,9 @@ button {
   max-width: 10rem;
   padding-top: 0.5rem;
 }
+
+.comment-body {
+  margin: 0rem;
+  padding: 0rem;
+}
+

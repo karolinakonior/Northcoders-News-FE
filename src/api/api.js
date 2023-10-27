@@ -53,3 +53,8 @@ export function getArticlesBySortTerm(topic = "", sortByTerm = "", order = "") {
 export function deleteComment (comment_id) {
   return articlesApi.delete(`/comments/${comment_id}`)
 }
+
+export function changeCommentVotes (comment_id, votes) {
+  const product = { "inc_votes": votes };
+  return articlesApi.patch(`/comments/${comment_id}`, product)
+}
