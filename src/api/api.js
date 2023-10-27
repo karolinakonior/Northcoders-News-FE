@@ -50,11 +50,21 @@ export function getArticlesBySortTerm(topic = "", sortByTerm = "", order = "") {
   return articlesApi.get(`/articles?topic=${topic}&sort_by=${sortByTerm}&order=${order}`)
 }
 
-export function deleteComment (comment_id) {
+export function deleteComment(comment_id) {
   return articlesApi.delete(`/comments/${comment_id}`)
 }
 
-export function changeCommentVotes (comment_id, votes) {
+export function changeCommentVotes(comment_id, votes) {
   const product = { "inc_votes": votes };
   return articlesApi.patch(`/comments/${comment_id}`, product)
+}
+
+export function postArticle(title, topic, body, username) {
+  const product = {
+    "title": title,
+    "topic": topic,
+    "body": body,
+    "author": username
+  };
+  return articlesApi.post(`/articles/`, product)
 }
