@@ -1,21 +1,21 @@
 import { UsernameContext } from "../context/username-context";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getUsers } from "../api/api";
 
 const Header = () => {
-    const { username, setUsername } = useContext(UsernameContext)
-    const [userInfo, setUserInfo] = useState(null)
+    const { username, setUsername } = useContext(UsernameContext);
+    const [userInfo, setUserInfo] = useState(null);
+    const [err, setErr] = useState("")
 
-    const getUserInfo = (username) => {
+    useEffect(() => {
         getUsers(username)
             .then((response) => {
                 setUserInfo(response.data.user)
             })
-
             .catch((err) => {
-                console.log(err)
+                setErr("Something went wrong, please try again.")
             })
-    }
+    }, [username]);
 
     return (
         <>
@@ -24,10 +24,11 @@ const Header = () => {
                     <section id="header-title-user">
                         <section id="header-title">
                             <h1>NC-News</h1>
+                            {err ? err : null}
                         </section>
                         </section>
                         <section id="header-user">
-                            {username ? getUserInfo(username) : ""}
+                            {username ?? ""}
                             {userInfo ? <img src={userInfo.avatar_url} style={{ height: "4rem", borderRadius: "1rem" }}></img> : ""}
                         </section>
                     

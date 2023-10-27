@@ -12,8 +12,6 @@ const SignIn = () => {
   const { username, setUsername } = useContext(UsernameContext)
   const [usernameInput, setUsernameInput] = useState("")
   const [err, setErr] = useState(null);
-  const [msg, setMsg] = useState(null)
-  const [isSignedIn, setIsSignedIn] = useState(false)
   const nav = useNavigate();
 
   const handleSubmit = (event) => {
@@ -21,9 +19,7 @@ const SignIn = () => {
     getUsers(usernameInput)
       .then((response) => {
         setUsername(response.data.user.username)
-        setMsg(`Welcome back ${response.data.user.username}!`)
         setErr(null)
-        setIsSignedIn(true)
       })
       .then(() => {
         nav(`/`);
@@ -39,7 +35,7 @@ const SignIn = () => {
 
   return (
     <>
-      {!username ? <Form fieldset id="article" onSubmit={handleSubmit} style={{ paddingLeft: "12rem"}}>
+      {!username ? <Form id="article" onSubmit={handleSubmit} style={{ paddingLeft: "12rem"}}>
         <Row className="mb-3">
           <Form.Group as={Col} md="4" style={{ width: '20rem' }}>
             <Form.Label style={{ paddingTop: '2rem', fontSize: "2rem" }}>
@@ -56,7 +52,6 @@ const SignIn = () => {
         <Button variant="dark" type="submit">Sign In</Button>
         <section style={{ paddingTop: '1rem', fontSize: "1.5rem" }}>
           {err ? <Card.Title>{err}</Card.Title> : null}
-          {msg ? <Card.Title>{msg}</Card.Title> : null}
         </section>
       </Form> : <Card.Title style={{ paddingTop: '2rem', fontSize: "2rem" }}>Already signed in!</Card.Title>}
     </>

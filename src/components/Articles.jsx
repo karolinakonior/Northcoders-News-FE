@@ -5,39 +5,41 @@ import Spinner from 'react-bootstrap/Spinner';
 import { useParams } from "react-router-dom"
 import { getArticlesByTopic } from "../api/api"
 import SortArticles from "./SortArticles";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Articles = () => {
     const [articles, setArticles] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const { topic } = useParams()
     const [error, setError] = useState("")
+    const nav = useNavigate();
 
     useEffect(() => {
         setIsLoading(true)
-        if (topic) {
-            getArticlesByTopic((topic))
-                .then(response => {
-                    setIsLoading(false)
-                    setArticles(response.data.articles)
-                    setError("")
-                })
-                .catch((error) => {
-                    setError("Something went wrong, please try again.")
-                })
-
-        } else {
-            getArticles()
-                .then((response) => {
-                    setIsLoading(false)
-                    setArticles(response.data.articles)
-                    setError("")
-                })
-                .catch((error) => {
-                    setError("Something went wrong, please try again.")
-                })
-        }
-
+            if (topic) {
+                    getArticlesByTopic((topic))
+                    .then(response => {
+                        setIsLoading(false)
+                        setArticles(response.data.articles)
+                        setError("")
+                    })
+                    .catch((error) => {
+                        if(error.code === 'ERR_BAD_REQUEST') {
+                            nav(`/error`)
+                        }
+                        setError("Something went wrong, please try again.")
+                    })
+            } else {
+                getArticles()
+                    .then((response) => {
+                        setIsLoading(false)
+                        setArticles(response.data.articles)
+                        setError("")
+                    })
+                    .catch((error) => {
+                        setError("Something went wrong, please try again.")
+                    })
+            }
     }, [topic])
 
     if (isLoading) {

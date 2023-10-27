@@ -20,14 +20,6 @@ const SortArticles = ({ articles, setArticles, topic }) => {
             createSearchParams({ sort_by: sort_by, order: order }))
     }
 
-    const validSortBys = ["created_at", "comment_count", "votes"]
-    const validOrder = ["desc", "asc"]
-
-    if (!validSortBys.includes(sortBy) || !validOrder.includes(order)) {
-        setSearchParams(
-            createSearchParams({ sort_by: "created_at", order: "desc" }))
-    }
-
     useEffect(() => {
         if (order === "asc") {
             setSort("ascending")

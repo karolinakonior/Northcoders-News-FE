@@ -15,9 +15,9 @@ TimeAgo.addLocale(ru)
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <UsernameProvider>
-        <App />
-      </UsernameProvider>
+        <UsernameProvider>
+          <App />
+        </UsernameProvider>
     </BrowserRouter>
-  </React.StrictMode>,
+  </React.StrictMode>
 )
