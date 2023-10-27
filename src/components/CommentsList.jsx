@@ -11,6 +11,8 @@ import { Link } from 'react-router-dom';
 import remove from '../images/remove.png';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
+import downvote from '../images/downvote.png'
+import upvote from '../images/upvote.png'
 
 
 const CommentsList = ({ article_id }) => {
@@ -87,12 +89,17 @@ const CommentsList = ({ article_id }) => {
                             <Card.Text>
                                 {comment.body}
                             </Card.Text>
+
                             <section className="container">
                                 <section className="wrapper">
+
                                     <section className="box a">
-                                        <Card.Subtitle className="mb-2 text-muted">
-                                            <img id="comment-icon" src={vote} alt="Image representing votes count" />{comment.votes}</Card.Subtitle>
+                                       
+                                            <img style={{ color: "white", height: "1.5rem" }} id="comment-icon" src={upvote} alt="Image representing votes count" />
+                                            <img style={{ color: "white", height: "1.5rem" }} id="comment-icon" src={downvote} alt="Image representing votes count" />
+                                            <b style={{paddingLeft: "0.5rem"}}>{comment.votes}</b>
                                     </section>
+
                                     <section className="box b">
                                         <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">{username ? (username === comment.author ? "Delete" : "You can delete only your comment!") : "Sign in to delete"}</Tooltip>}>
                                             <button className="button" onClick={(() => { handleClick(comment.comment_id) })} 
@@ -102,6 +109,7 @@ const CommentsList = ({ article_id }) => {
                                     </section>
                                 </section>
                             </section>
+
                         </Card.Body>
                     </Card>
                 )
