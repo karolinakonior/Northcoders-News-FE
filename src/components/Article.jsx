@@ -16,8 +16,9 @@ import { UsernameContext } from '../context/username-context';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import { useNavigate } from "react-router-dom";
+import getUserIconUrl from '../helpers/usersHelper';
 
-const Article = () => {
+const Article = ({ users }) => {
     const { article_id } = useParams()
     const [article, setArticle] = useState({})
     const [isLoading, setIsLoading] = useState(true)
@@ -44,7 +45,7 @@ const Article = () => {
                     setArticle(response.data.article)
                     setArticleVotes(response.data.article.votes)
                 }
-                setIsLoading(false)      
+                setIsLoading(false)
             })
             .catch((err) => {
                 setErr('Something went wrong, please try again.');
@@ -91,54 +92,45 @@ const Article = () => {
 
     return (
         <>
-            <section id="article" style={{ paddingLeft: "12rem", width: "98%" }}>
-                <Card.Title style={{ 'fontSize': '2rem', paddingBottom: "1rem" }}>{article.topic.toUpperCase()}: {article.title}</Card.Title>
-                <Card id="article-card" style={{ width: '80%' }}>
-                    <Card.Body>
-                        <section className="container">
-                            <section className="wrapper">
-                                <section className="box a">
-                                    <img style={{ height: "2rem" }} src={user} alt="Image representing a user" /><b style={{ paddingLeft: "0.5rem" }}>{article.author}</b>
-
-                                </section>
-                                <section className="box b">
-
-                                    <img style={{ height: "2rem" }} src={clock} alt="Image representing a clock" />
-                                    <b style={{ paddingLeft: "0.5rem" }}>
-                                        <ReactTimeAgo date={createdAt} locale="en-US" />
-                                    </b>
-                                </section>
-                            </section>
+            <Card.Title style={{ 'fontSize': '2rem', paddingBottom: "1rem" }}>{article.topic.toUpperCase()}: {article.title}</Card.Title>
+            <Card id="article-card">
+                <Card.Body>
+                    <section className="article-section" style={{ marginBottom: "0.5rem" }}>
+                        <section>
+                            <img style={{ height: "2rem" }} src={getUserIconUrl(users, article.author)} alt="Image representing a user" />
+                            <b style={{ marginLeft: "0.5rem" }}>{article.author}</b>
                         </section>
-                        <Card.Img src={article.article_img_url} alt="Image corresponding to the article topic" ></Card.Img>
-                        <Card.Text style={{ "paddingTop": '0.5rem' }}>
-                            {article.body}
-                        </Card.Text>
-                        <section className="container">
-                            <section className="wrapper">
-                                <section className="box a">
-                                <OverlayTrigger overlay={ <Tooltip id="tooltip-disabled">{username ? "Upvote" : "Sign in to vote!"}</Tooltip>}>
-                                    <button className="button" id={isAddDisabled ? "button-disabled" : ""} disabled={username ? isAddDisabled : true} onClick={(() => { handleVote(1) })} >
-                                        <img style={{ height: "2rem" }} src={upvote} alt="Image representing votes count" /></button>
-                                        </OverlayTrigger>
-                                        <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">{username ? "Downvote" : "Sign in to vote!"}</Tooltip>}>
-                                    <button id={isSubtractDisabled ? "button-disabled" : ""} disabled={username ? isSubtractDisabled : true} onClick={(() => { handleVote(-1) })}>
-                                        <img style={{ height: "2rem" }} src={downvote} alt="Image representing votes count" />
-                                    </button>
-                                    </OverlayTrigger>
-                                    <b style={{ paddingLeft: "0.5rem" }}>{articleVotes}</b>
-                                    {err ? <p>{err}</p> : null}
-                                </section>
-                                <section className="box b">
-                                    <img style={{ height: "2rem" }} id="comment-icon" src={comment} alt="Image representing a comment" />
-                                    <b style={{ paddingLeft: "0.5rem" }}>{article.comment_count}</b>
-                                </section>
-                            </section>
+                        <section>
+                            <img style={{ height: "2rem" }} src={clock} alt="Image representing a clock" />
+                            <ReactTimeAgo date={createdAt} style={{ fontWeight: "bold", marginLeft: "0.25rem" }} />
                         </section>
-                    </Card.Body>
-                    <CommentsList article_id={article_id} />
-                </Card>
-            </section>
+                    </section>
+                    <Card.Img src={article.article_img_url} alt="Image corresponding to the article topic" ></Card.Img>
+                    <Card.Text>
+                        {article.body}
+                    </Card.Text>
+                    <section className="article-section">
+                        <section>
+                            <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">{username ? "Upvote" : "Sign in to vote!"}</Tooltip>}>
+                                <button className="button" id={isAddDisabled ? "button-disabled" : ""} disabled={username ? isAddDisabled : true} onClick={(() => { handleVote(1) })} >
+                                    <img style={{ height: "2rem" }} src={upvote} alt="Image representing votes count" /></button>
+                            </OverlayTrigger>
+                            <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">{username ? "Downvote" : "Sign in to vote!"}</Tooltip>}>
+                                <button id={isSubtractDisabled ? "button-disabled" : ""} disabled={username ? isSubtractDisabled : true} onClick={(() => { handleVote(-1) })}>
+                                    <img style={{ height: "2rem" }} src={downvote} alt="Image representing votes count" />
+                                </button>
+                            </OverlayTrigger>
+                            <b style={{ paddingLeft: "0.5rem" }}>{articleVotes}</b>
+                            {err ? <p>{err}</p> : null}
+                        </section>
+                        <section>
+                            <img style={{ height: "2rem" }} id="comment-icon" src={comment} alt="Image representing a comment" />
+                            <b style={{ paddingLeft: "0.5rem" }}>{article.comment_count}</b>
+                        </section>
+                    </section>
+                </Card.Body>
+                <CommentsList users={users} article_id={article_id} />
+            </Card>
         </>
     );
 }

@@ -7,12 +7,12 @@ import { UsernameContext } from "../context/username-context";
 import remove from '../images/remove.png';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
-import downvote from '../images/downvote.png'
-import upvote from '../images/upvote.png'
-import clock from '../images/clock-icon.png'
-import user from '../images/user-icon.png'
+import downvote from '../images/downvote.png';
+import upvote from '../images/upvote.png';
+import clock from '../images/clock-icon.png';
+import user from '../images/user-icon.png';
 
-const Comment = ({ comment_id, votes, created_at, author, body, article_id, comments, setComments }) => {
+const Comment = ({ comment_id, votes, created_at, author, author_image_url, body, article_id, comments, setComments }) => {
     const [isLoading, setIsLoading] = useState(true)
     const { username, setUsername } = useContext(UsernameContext)
     const [isDisabled, setIsDisabled] = useState(null)
@@ -97,12 +97,12 @@ const Comment = ({ comment_id, votes, created_at, author, body, article_id, comm
 
     return (
         <>
-            <Card style={{ width: '100%' }} key={comment_id}>
+            <Card key={comment_id}>
                 <Card.Body >
                     <section className="container">
                         <section className="wrapper">
                             <section className="box a">
-                                <img style={{ height: "1.5rem" }} src={user} alt="Image representing a user" /><b style={{ paddingLeft: "0.5rem" }}>{author}</b>
+                                <img style={{ height: "1.5rem" }} src={author_image_url} alt="Image representing a user" /><b style={{ paddingLeft: "0.5rem" }}>{author}</b>
                             </section>
                             <section className="box b">
                                 <img style={{ height: "1.5rem" }} src={clock} alt="Image representing a clock" />
