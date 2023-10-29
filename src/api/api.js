@@ -21,7 +21,11 @@ export function changeArticleVotes(article_id, votes) {
   return articlesApi.patch(`https://northcoders-news-api-ibfk.onrender.com/api/articles/${article_id}`, product)
 }
 
-export function getUsers(username) {
+export function getUsers() {
+  return articlesApi.get(`/users`)
+}
+
+export function getUser(username) {
   return articlesApi.get(`/users/${username}`)
 }
 

@@ -74,7 +74,7 @@ const PostArticle = ({ topics }) => {
                         </Form.Group>
                     </Row>
                     <Row className="mb-3">
-                        <Form.Group as={Col} style={{ width: "100%" }} controlId="validationCustom03">
+                        <Form.Group as={Col} style={{ width: "100%" }}>
                             <Form.Label htmlFor="article"><Card.Title style={{ paddingTop: '1rem', fontSize: "1.5rem" }}>Article</Card.Title></Form.Label>
                             <Form.Control as="textarea"
                                 type="text"

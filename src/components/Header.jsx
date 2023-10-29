@@ -1,14 +1,14 @@
 import { UsernameContext } from "../context/username-context";
 import { useContext, useEffect, useState } from "react";
-import { getUsers } from "../api/api";
+import { getUser } from "../api/api";
 
 const Header = () => {
-    const { username, setUsername } = useContext(UsernameContext);
+    const { username } = useContext(UsernameContext);
     const [userInfo, setUserInfo] = useState(null);
     const [err, setErr] = useState("")
 
     useEffect(() => {
-        getUsers(username)
+        getUser(username)
             .then((response) => {
                 setUserInfo(response.data.user)
             })
@@ -18,26 +18,18 @@ const Header = () => {
     }, [username]);
 
     return (
-        <>
-            <nav id="header">
-                <header id="header-column">
-                    <section id="header-title-user">
-                        <section id="header-title">
-                            <h1>NC-News</h1>
-                            {err ? err : null}
-                        </section>
-                        </section>
-                        <section id="header-user">
-                            {username ?? ""}
-                            {userInfo ? <img src={userInfo.avatar_url} style={{ height: "4rem", borderRadius: "1rem" }}></img> : ""}
-                        </section>
-                    
-                </header>
-            </nav>
-        </>
+        <header id="header">
+            <section id="header-title">
+                <h1>NC-News</h1>
+                {err ? err : null}
+            </section>
+
+            <section className="flex-center-align">
+                <section style={{ marginRight: "1rem" }}>{username ?? ""}</section>
+                {userInfo ? <img src={userInfo.avatar_url} style={{ height: "3.5rem" }} ></img> : ""}
+            </section>
+        </header>
     );
 }
 
 export default Header;
-
-

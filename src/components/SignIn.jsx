@@ -1,4 +1,4 @@
-import { getUsers } from "../api/api";
+import { getUser } from "../api/api";
 import { UsernameContext } from "../context/username-context";
 import { useContext, useState } from "react";
 import Button from 'react-bootstrap/Button';
@@ -16,7 +16,7 @@ const SignIn = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    getUsers(usernameInput)
+    getUser(usernameInput)
       .then((response) => {
         setUsername(response.data.user.username)
         setErr(null)

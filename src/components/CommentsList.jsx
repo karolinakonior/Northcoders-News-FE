@@ -1,22 +1,15 @@
 import { useEffect, useState, useContext } from "react";
 import { deleteComment, getComments } from '../api/api';
 import Card from 'react-bootstrap/Card';
-import ReactTimeAgo from 'react-time-ago';
-import vote from '../images/vote-icon.png';
 import Spinner from 'react-bootstrap/Spinner';
 import { UsernameContext } from "../context/username-context";
 import PostComment from './PostComment';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
-import remove from '../images/remove.png';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Tooltip from 'react-bootstrap/Tooltip';
-import downvote from '../images/downvote.png'
-import upvote from '../images/upvote.png'
 import Comment from "./Comment";
+import getUserIconUrl from '../helpers/usersHelper';
 
-
-const CommentsList = ({ article_id }) => {
+const CommentsList = ({ users, article_id }) => {
     const [comments, setComments] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const { username, setUsername } = useContext(UsernameContext)
@@ -55,7 +48,16 @@ const CommentsList = ({ article_id }) => {
 
             <ul className="comment-body">
                     {comments.map(comment => {
-                        return <Comment key={comment.comment_id} comment_id={comment.comment_id} votes={comment.votes} created_at={comment.created_at} author={comment.author} body={comment.body} article_id={article_id} comments={comments} setComments={setComments}/>
+                        return <Comment key={comment.comment_id} 
+                        comment_id={comment.comment_id} 
+                        votes={comment.votes} 
+                        created_at={comment.created_at} 
+                        author={comment.author}
+                        author_image_url={getUserIconUrl(users, comment.author)} 
+                        body={comment.body} 
+                        article_id={article_id} 
+                        comments={comments} 
+                        setComments={setComments}/>
                     })}
                 </ul>
         </>

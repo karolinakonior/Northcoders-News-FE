@@ -1,39 +1,23 @@
-.grid {
-  display: grid;
-  grid-template-rows: 5rem;
-
-  grid-template-areas:
-    "header header header"
-    "sidebar article article"
-    "sidebar article article"
-}
-
-#article {
-  grid-area: article;
-  padding-left: 1rem;
-  padding-top: 1rem;
-}
-
 #header {
   background: #0B1416;
-  grid-area: header;
   color: white;
-  height: 100%;
-  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
-#sidebar {
-  grid-area: sidebar;
-  margin: 1rem;
+.flex-center-align {
+  display: flex;
+  align-items: center;
 }
 
-#article-card {
-  height: auto;
-  padding-left: 0rem;
-}
-
-*/ #articles-title {
-  background-color: black;
+.article-section {
+  display: flex;
+  justify-content: space-between;
 }
 
 #article-card-image {
@@ -58,10 +42,6 @@
   text-align: right;
 }
 
-.container {
-  height: 2.5rem;
-}
-
 button {
   padding: 0.1em 0.1em;
   background-color: #ffffff;
@@ -74,58 +54,10 @@ button {
   cursor: not-allowed;
 }
 
-#header-column {
-  display: grid;
-  grid-template-columns: 50% 50%;
-}
-
-#header-title {
-  grid-column: 1 / 2;
-  padding-left: 1rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-
-}
-
-#header-user {
-  grid-column: 2 / 2;
-  float: right;
-  margin: 0rem;
-  padding-right: 1rem;
-  text-align: right;
-}
-
 #articles-title-block {
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-template-areas:
-    "articles-title dropdown-grid";
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 10px;
-}
-
-#articles-title {
-  grid-column: 1 / 2;
-}
-
-.dropdown {
-  grid-column: 2 / 2;
-}
-
-#dropdown-basic {
   display: flex;
   align-items: center;
-  grid-column: 1 / 2;
-}
-
-.dropdown-grid {
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-template-areas:
-    "dropdown-basic sorting-text";
-  align-items: right;
-  padding-left: 1rem;
+  justify-content: space-between;
 }
 
 .sorting-text {
@@ -139,3 +71,29 @@ button {
   padding: 0rem;
 }
 
+.centered-element{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.dropdown-item-checked::after {
+  position: absolute;
+  margin-left: 0.25rem;
+  content: '✓';
+  font-weight: 600;
+}
+
+/* .offcanvas-parent {
+  position: relative;
+  overflow: hidden;
+
+  .offcanvas {
+    position: absolute;
+  }
+  .modal-backdrop {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
+} */
