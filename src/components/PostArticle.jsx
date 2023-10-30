@@ -22,7 +22,7 @@ const PostArticle = ({ topics }) => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if (/^[\s]+$/.test(title) || (/^[\s]+$/.test(body))) {
+        if (/^[\s]+$/.test(title) || (/^[\s]+$/.test(body)) || title.length === 0 || body.length === 0) {
             setError("Title or article body is empty. Please try again.")
         } else {
             postArticle(title, topic, body, username)
