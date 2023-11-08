@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Card from 'react-bootstrap/Card';
@@ -55,6 +55,15 @@ const NavBar = ({ topics, error }) => {
                             </section>
                         )
                     })}
+
+                    <Card>
+                        <Link style={{ color: "black", textDecoration: "none" }} to="/addtopic">
+                            <Card.Body>
+                                <Card.Title style={{ padding: '0.2rem' }}> ADD TOPIC
+                                </Card.Title>
+                            </Card.Body>
+                        </Link>
+                    </Card>
 
                     <Card>
                         <Link style={{ color: "black", textDecoration: "none" }} to="/postarticle">

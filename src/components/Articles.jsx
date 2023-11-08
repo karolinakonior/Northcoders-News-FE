@@ -22,8 +22,12 @@ const Articles = ({ users }) => {
             getArticlesByTopic((topic))
                 .then(response => {
                     setIsLoading(false)
-                    setArticles(response.data.articles)
-                    setError("")
+                    if(response.data.articles.length === 0) {
+                        setError("No articles found for this topic.")
+                    } else {
+                        setArticles(response.data.articles)
+                        setError("")
+                    } 
                 })
                 .catch((error) => {
                     if (error.code === 'ERR_BAD_REQUEST') {
@@ -58,11 +62,11 @@ const Articles = ({ users }) => {
     return (
         <>
             <div id="article">
-                {error ? <p>{error}</p> : null}
                 <section id="articles-title-block">
                     <h1 id="articles-title">{topic ? topic.toUpperCase() : null} ARTICLES</h1>
                     <SortArticles id="articles-sortby" setArticles={setArticles} topic={topic} />
                 </section>
+                {error ? <p>{error}</p> : null}
                 <Row gutter={40}>
                     {(articles).map(article =>
                         <Col key={article.article_id} style={{ marginBottom: "1.5rem" }}
