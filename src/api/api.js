@@ -72,3 +72,11 @@ export function postArticle(title, topic, body, username) {
   };
   return articlesApi.post(`/articles/`, product)
 }
+
+export function postTopic(topic, description) {
+  const product = {
+    "slug": topic,
+    "description": description
+  };
+  return articlesApi.post(`/topics`, product)
+}

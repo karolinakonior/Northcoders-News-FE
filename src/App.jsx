@@ -11,11 +11,13 @@ import PostArticle from './components/PostArticle';
 import { useEffect, useState } from "react";
 import { getTopics, getUsers } from './api/api';
 import { Col, Container, Row } from 'react-bootstrap';
+import AddTopic from './components/AddTopic';
 
 function App() {
   const [topics, setTopics] = useState([]);
   const [users, setUsers] = useState([]);
   const [error, setError] = useState("");
+  const [topicToAdd, setTopicToAdd] = useState("")
 
   useEffect(() => {
     getTopics()
@@ -33,14 +35,14 @@ function App() {
       .catch((err) => {
         setError("Something went wrong, please try again.")
       })
-  }, [])
+  }, [topicToAdd])
 
   return (
     <Container >
       <Header />
       <Row style={{ marginTop: "1rem" }}>
         <Col xs="1">
-          <NavBar topics={topics} error={error} />
+          <NavBar topics={topics} error={error}/>
         </Col>
         <Col>
           <Routes>
@@ -49,6 +51,7 @@ function App() {
             <Route exact path="/topicerror" element={<Error />} />
             <Route exact path="/home" element={<Homepage />} />
             <Route exact path="/signin" element={<SignIn />} />
+            <Route exact path="/addtopic" element={<AddTopic topicToAdd={topicToAdd} setTopicToAdd={setTopicToAdd}/>} />
             <Route exact path="/postarticle" element={<PostArticle topics={topics} />} />
             <Route exact path="/articles/all/*" element={<Articles users={users} />} />
             <Route path="/articles/:topic/*" element={<Articles users={users}/>} />
