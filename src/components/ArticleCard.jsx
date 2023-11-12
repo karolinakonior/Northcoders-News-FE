@@ -18,7 +18,7 @@ const ArticleCard = ({ topic, article_id, comment_count, title, author, author_i
             <Card id="article-card">
                 <Card.Body>
                     <Link to={`article/${article_id}`} style={{ color: 'black', 'textDecoration': 'none' }}>
-                        <section className="article-section" style={{ marginBottom: "0.5rem" }}>
+                        <section className="flex-space-between " style={{ marginBottom: "0.5rem" }}>
                             <section>
                                 <Image style={{ height: "1.5rem" }} src={author_image_url} alt="Image representing a user" />
                                 <b style={{ marginLeft: "0.5rem" }}>{author}</b>
@@ -33,7 +33,7 @@ const ArticleCard = ({ topic, article_id, comment_count, title, author, author_i
                         <section className="flex-center-align" style={{ height: "5rem" }}>
                             <Card.Title>{topic.toUpperCase()}: {title}</Card.Title>
                         </section>
-                        <section className="article-section">
+                        <section className="flex-space-between ">
                             <section>
                                 <Image style={{ height: "1.5rem", marginRight: "0.25rem" }} src={vote} alt="Image representing votes count" />
                                 <b>{votes}</b>
