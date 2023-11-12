@@ -96,51 +96,47 @@ const Comment = ({ comment_id, votes, created_at, author, author_image_url, body
     }
 
     return (
-        <>
-            <Card key={comment_id}>
-                <Card.Body >
-                    <section className="container">
-                        <section className="wrapper">
-                            <section className="box a">
-                                <img style={{ height: "1.5rem" }} src={author_image_url} alt="Image representing a user" /><b style={{ paddingLeft: "0.5rem" }}>{author}</b>
-                            </section>
-                            <section className="box b">
-                                <img style={{ height: "1.5rem" }} src={clock} alt="Image representing a clock" />
-                                <b style={{ paddingLeft: "0.5rem" }}><ReactTimeAgo date={parseCommentCreatedAt(created_at)} locale="en-US" /></b>
-                            </section>
-                        </section>
+        <Card key={comment_id} style={{ margin: "0.5rem" }}>
+            <Card.Body>
+                <section className="flex-space-between" style={{ marginBottom: "1rem" }}>
+                    <section>
+                        <img style={{ height: "1.5rem" }} src={author_image_url} alt="Image representing a user" />
+                        <b style={{ marginLeft: "0.5rem" }}>{author}</b>
                     </section>
-                    <Card.Text>
-                        {body}
-                    </Card.Text>
-                    <section className="container">
-                        <section className="wrapper">
-                            <section className="box a">
-                                <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">{username ? "Upvote" : "Sign in to vote!"}</Tooltip>}>
-                                    <button className="button" id={isAddDisabled ? "button-disabled" : ""} disabled={username ? isAddDisabled : true} onClick={(() => { handleVote(1) })} >
-                                        <img style={{ color: "white", height: "1.5rem" }} id="comment-icon" src={upvote} alt="Image representing votes count" />
-                                    </button>
-                                </OverlayTrigger>
-                                <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">{username ? "Downvote" : "Sign in to vote!"}</Tooltip>}>
-                                    <button id={isSubtractDisabled ? "button-disabled" : ""} disabled={username ? isSubtractDisabled : true} onClick={(() => { handleVote(-1) })}>
-                                        <img style={{ color: "white", height: "1.5rem" }} id="comment-icon" src={downvote} alt="Image representing votes count" />
-                                    </button>
-                                </OverlayTrigger>
-                                <b style={{ paddingLeft: "0.5rem" }}>{commentVotes}</b>
-                                {error ? <p>{error}</p> : null}
-                            </section>
-                            <section className="box b">
-                                <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">{username ? (username === author ? "Delete" : "You can delete only your comment!") : "Sign in to delete"}</Tooltip>}>
-                                    <button className="button" onClick={(() => { handleClick(comment_id) })}
-                                        disabled={username === author && isDisabled ? false : true}>
-                                        <img id="remove-icon" src={remove} style={{ color: "white", height: "1.5rem" }} alt="Image representing delete icon" /></button>
-                                </OverlayTrigger>
-                            </section>
-                        </section>
+                    <section>
+                        <img style={{ height: "1.5rem" }} src={clock} alt="Image representing a clock" />
+                        <ReactTimeAgo date={parseCommentCreatedAt(created_at)} style={{ fontWeight: "bold", marginLeft: "0.25rem" }} />
                     </section>
-                </Card.Body>
-            </Card>
-        </>
+                </section>
+                <Card.Text>
+                    {body}
+                </Card.Text>
+
+                <section className="flex-space-between-center-aligned">
+                    <section>
+                        <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">{username ? "Upvote" : "Sign in to vote!"}</Tooltip>}>
+                            <button className="button" id={isAddDisabled ? "button-disabled" : ""} disabled={username ? isAddDisabled : true} onClick={(() => { handleVote(1) })} >
+                                <img style={{ color: "white", height: "1.5rem" }} id="comment-icon" src={upvote} alt="Image representing votes count" />
+                            </button>
+                        </OverlayTrigger>
+                        <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">{username ? "Downvote" : "Sign in to vote!"}</Tooltip>}>
+                            <button id={isSubtractDisabled ? "button-disabled" : ""} disabled={username ? isSubtractDisabled : true} onClick={(() => { handleVote(-1) })}>
+                                <img style={{ color: "white", height: "1.5rem" }} id="comment-icon" src={downvote} alt="Image representing votes count" />
+                            </button>
+                        </OverlayTrigger>
+                        <b style={{ marginLeft: "0.5rem" }}>{commentVotes}</b>
+                        {error ? <p>{error}</p> : null}
+                    </section>
+                    <section>
+                        <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">{username ? (username === author ? "Delete" : "You can only delete your comment!") : "Sign in to delete"}</Tooltip>}>
+                            <button className="button" onClick={(() => { handleClick(comment_id) })}
+                                disabled={username === author && isDisabled ? false : true}>
+                                <img id="remove-icon" src={remove} style={{ color: "white", height: "1.5rem" }} alt="Image representing delete icon" /></button>
+                        </OverlayTrigger>
+                    </section>
+                </section>
+            </Card.Body>
+        </Card>
     );
 }
 

@@ -22,12 +22,12 @@ const Articles = ({ users }) => {
             getArticlesByTopic((topic))
                 .then(response => {
                     setIsLoading(false)
-                    if(response.data.articles.length === 0) {
+                    if (response.data.articles.length === 0) {
                         setError("No articles found for this topic.")
                     } else {
                         setArticles(response.data.articles)
                         setError("")
-                    } 
+                    }
                 })
                 .catch((error) => {
                     if (error.code === 'ERR_BAD_REQUEST') {
@@ -50,19 +50,16 @@ const Articles = ({ users }) => {
 
     if (isLoading) {
         return <>
-            <div style={{ paddingTop: "2rem", size: "20rem" }}>
-                <Spinner animation="border" role="status">
-                    <span className="visually-hidden">Loading...</span>
-                </Spinner>
-                <p style={{ paddingTop: "3rem" }}>Please wait - the articles are taking longer to load on a first render.</p>
-            </div>
+            <Spinner className="loading-spinner" animation="border" role="status">
+                <span className="visually-hidden">Loading...</span>
+            </Spinner>
         </>
     }
 
     return (
         <>
             <div id="article">
-                <section id="articles-title-block">
+                <section id="articles-title-block" className="flex-space-between-center-aligned">
                     <h1 id="articles-title">{topic ? topic.toUpperCase() : null} ARTICLES</h1>
                     <SortArticles id="articles-sortby" setArticles={setArticles} topic={topic} />
                 </section>

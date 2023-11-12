@@ -82,11 +82,9 @@ const Article = ({ users }) => {
 
     if (isLoading) {
         return <>
-            <div style={{ paddingTop: "2rem", size: "20rem" }}>
-                <Spinner animation="border" role="status">
-                    <span className="visually-hidden">Loading...</span>
-                </Spinner>
-            </div>
+            <Spinner className="loading-spinner" animation="border" role="status">
+                <span className="visually-hidden">Loading...</span>
+            </Spinner>
         </>
     }
 
@@ -95,7 +93,7 @@ const Article = ({ users }) => {
             <Card.Title style={{ 'fontSize': '2rem', paddingBottom: "1rem" }}>{article.topic.toUpperCase()}: {article.title}</Card.Title>
             <Card id="article-card">
                 <Card.Body>
-                    <section className="article-section" style={{ marginBottom: "0.5rem" }}>
+                    <section className="flex-space-between" style={{ marginBottom: "0.5rem" }}>
                         <section>
                             <img style={{ height: "2rem" }} src={getUserIconUrl(users, article.author)} alt="Image representing a user" />
                             <b style={{ marginLeft: "0.5rem" }}>{article.author}</b>
@@ -109,7 +107,7 @@ const Article = ({ users }) => {
                     <Card.Text>
                         {article.body}
                     </Card.Text>
-                    <section className="article-section">
+                    <section className="flex-space-between">
                         <section>
                             <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">{username ? "Upvote" : "Sign in to vote!"}</Tooltip>}>
                                 <button className="button" id={isAddDisabled ? "button-disabled" : ""} disabled={username ? isAddDisabled : true} onClick={(() => { handleVote(1) })} >

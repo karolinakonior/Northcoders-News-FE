@@ -53,6 +53,15 @@ const SortArticles = ({ setArticles, topic }) => {
 
     setTimeout(handleError, 4000);
 
+    const sorts = [
+        { name: "Date posted - descending", sortBy: "created_at", direction: "desc" },
+        { name: "Date posted - ascending", sortBy: "created_at", direction: "asc" },
+        { name: "Comments - descending", sortBy: "comment_count", direction: "desc" },
+        { name: "Comments - ascending", sortBy: "comment_count", direction: "asc" },
+        { name: "Votes - descending", sortBy: "votes", direction: "desc" },
+        { name: "Votes - ascending", sortBy: "votes", direction: "asc" }
+    ]
+
     return (
         <section className='dropdown-grid'>
             <Dropdown align="end">
@@ -60,25 +69,13 @@ const SortArticles = ({ setArticles, topic }) => {
                     Sort articles
                 </Dropdown.Toggle>
                 <Dropdown.Menu style={{ paddingRight: "0.5rem" }}>
-
-                    <Dropdown.Item className={setActiveSortBy(1)} onClick={() => { handleClick("created_at", "desc", 1) }}>
-                        Date posted - descending
-                    </Dropdown.Item>
-                    <Dropdown.Item className={setActiveSortBy(2)} onClick={() => { handleClick("created_at", "asc", 2) }}>
-                        Date posted - ascending
-                    </Dropdown.Item>
-                    <Dropdown.Item className={setActiveSortBy(3)} onClick={() => { handleClick("comment_count", "desc", 3) }}>
-                        Comments - descending
-                    </Dropdown.Item>
-                    <Dropdown.Item className={setActiveSortBy(4)} onClick={() => { handleClick("comment_count", "asc", 4) }}>
-                        Comments - ascending
-                    </Dropdown.Item>
-                    <Dropdown.Item className={setActiveSortBy(5)} onClick={() => { handleClick("votes", "desc", 5) }}>
-                        Votes - descending
-                    </Dropdown.Item>
-                    <Dropdown.Item className={setActiveSortBy(6)} onClick={() => { handleClick("votes", "asc", 6) }}>
-                        Votes - ascending
-                    </Dropdown.Item>
+                    {
+                        sorts.map((item, index) => {
+                            return <Dropdown.Item key={`sortBy_${index}`} className={setActiveSortBy(index)} onClick={() => { handleClick(item.sortBy, item.direction, index) }}>
+                                {item.name}
+                            </Dropdown.Item>
+                        })
+                    }
                 </Dropdown.Menu>
             </Dropdown>
             <section className='sorting-text'>
